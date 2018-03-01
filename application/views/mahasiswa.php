@@ -21,9 +21,9 @@ $(document).ready(function(){
       <form id="tambah-div" action="<?php echo base_url('mahasiswa/tambah') ?>" method="POST" enctype="multipart/form-data">
       <div class="modal-body">
       <label>NBI</label>
-      <input type="number" class="form-control" required="" placeholder="Masukkan NBI Anda" name="nbi">
+      <input type="number" class="form-control" required="" placeholder="Masukkan NBI" name="nbi">
       <label>Nama</label>
-      <input type="text" class="form-control" required="" placeholder="Masukkan Nama Anda" name="nm_mahasiswa">
+      <input type="text" class="form-control" required="" placeholder="Masukkan Nama" name="nm_mahasiswa">
       <label>Fakultas :</label>
       <select class="form-control" name="fakultas" id="fakultas">
       <option>Select Fakultas</option>}
@@ -52,7 +52,7 @@ $(document).ready(function(){
 			<div class="col-md-12">
 				<div class="widget widget-pie-chart">
 					<header class="widget-header">
-						<h4 class="widget-title">Data Dosen</h4>
+						<h4 class="widget-title">Data Mahasiswa</h4>
 					</header>
 					<hr class="widget-separator"/>
 					<div class="widget-body clearfix">

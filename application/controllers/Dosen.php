@@ -27,42 +27,42 @@ class Dosen extends CI_Controller {
 		$id_dosen = $this->input->post('id_dosen');
 		$nm_dosen = $this->input->post('nm_dosen');
 
-		mkdir('./gambar/dosen/'.$nm_dosen, 0777, TRUE);
-		$nmfile = "img_".$nm_dosen."_".time();
+		mkdir('./gambar/dosen/'.$id_dosen, 0777, TRUE);
+		$nmfile = "img_".$id_dosen."_".time();
 
-		$config['upload_path'] = './gambar/dosen/'.$nm_dosen;
+		$config['upload_path']   = './gambar/dosen/'.$id_dosen;
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']  = '1000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
-		$config['file_name'] = $nmfile;
+		$config['max_size']      = '1000';
+		$config['max_width']     = '5000';
+		$config['max_height']    = '5000';
+		$config['file_name']     = $nmfile;
 		
 		$this->load->library('upload', $config);
 		
 		if ( ! $this->upload->do_upload('foto')){
 			$error = array('error' => $this->upload->display_errors());
-	    	// echo "<script>alert('Upload foto gagal');</script>";
-			// var_dump($error);
+	    	echo "<script>alert('Upload foto gagal');</script>";
+			var_dump($error);
 		}else{
 			$data = array('upload_data' => $this->upload->data());
-	    	// echo "<script>alert('Upload foto sukses');</script>";
-	    	// var_dump($this->upload->data());
+	    	echo "<script>alert('Upload foto sukses');</script>";
+	    	var_dump($this->upload->data());
 		}
 
 		$foto = $this->upload->data();
 
 		$username = $this->input->post('username');
 		$fakultas = $this->input->post('fakultas');
-		$jurusan = $this->input->post('jurusan');
+		$jurusan  = $this->input->post('jurusan');
 
 		$data1 = array(
 			"id_dosen" => $id_dosen,
 			"nm_dosen" => $nm_dosen,
 			"username" => $username,
 			"fakultas" => $fakultas,
-			"jurusan" => $jurusan,
-			"pass" => 'untag',
-			"foto" => $foto['file_name']
+			"jurusan"  => $jurusan,
+			"pass"     => 'untag',
+			"foto"     => $foto['file_name']
 		);
 
 		$this->models->tambah('tb_dosen',$data1);
@@ -85,58 +85,54 @@ class Dosen extends CI_Controller {
  	{
 		$id_dosen = $id_dosen;
 		$nm_dosen = $this->input->post('nm_dosen');
-		$gambar = $this->input->post('foto');
+		// $gambar = $this->input->post('foto');
 		
-		if($gambar != "") {
- 		mkdir('./gambar/dosen/'.$nm_dosen, 0777, TRUE);
-		$nmfile = "img_".$nm_dosen."_".time();
-		$config['file_name'] = $nmfile;
-		}
+ 		$nmfile = "img_".$nm_dosen."_".time();
 		
-		$config['upload_path'] = './gambar/dosen/'.$nm_dosen;
+		$config['upload_path']   = './gambar/dosen/'.$nm_dosen;
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']  = '1000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+		$config['max_size']      = '1000';
+		$config['max_width']     = '5000';
+		$config['max_height']    = '5000';
+		$config['file_name']     = $nmfile;
 		
 		$this->load->library('upload', $config);
 		
 		if ( ! $this->upload->do_upload('foto')){
 			$error = array('error' => $this->upload->display_errors());
 	    	echo "<script>alert('Update foto gagal');</script>";
-			// var_dump($error);
+			var_dump($error);
 		}else{
 			$data = array('upload_data' => $this->upload->data());
 	    	echo "<script>alert('Update foto sukses');</script>";
-	    	// var_dump($this->upload->data());
+	    	var_dump($this->upload->data());
 		}
 
-		
 		$username = $this->input->post('username');
 		$fakultas = $this->input->post('fakultas');
-		$jurusan = $this->input->post('jurusan');
-		$pass = $this->input->post('pass');
+		$jurusan  = $this->input->post('jurusan');
+		$pass     = $this->input->post('pass');
 
 		$foto = $this->upload->data();
 
 		$where = array('id_dosen' => $id_dosen);
-		
-		if($foto['file_name'] == "") {
+		if($gambar == "") {
+		// if($foto['file_name'] == "") {
 			$data  = array(
 				"nm_dosen" => $nm_dosen,
 				"username" => $username,
 				"fakultas" => $fakultas,
-				"jurusan" => $jurusan,
-				"pass" => $pass
+				"jurusan"  => $jurusan,
+				"pass"     => $pass
 			);
 		}else{
 			$data  = array(
 				"nm_dosen" => $nm_dosen,
 				"username" => $username,
 				"fakultas" => $fakultas,
-				"jurusan" => $jurusan,
-				"pass" => $pass,
-				"foto" => $foto['file_name']
+				"jurusan"  => $jurusan,
+				"pass"     => $pass,
+				"foto"     => $foto['file_name']
 			);
 		}
 

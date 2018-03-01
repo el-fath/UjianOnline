@@ -14,7 +14,7 @@ class Bab extends CI_Controller {
 	public function index()
 	{
 		$where = $this->session->userdata('id_dosen');
-		$data['matk'] = $this->models->tampil_fakjur_w('tb_matkul',$where);
+		$data['matk']  = $this->models->tampil_fakjur_w('tb_matkul',$where);
 
 		$data['kel'] = $this->models->tampil('tb_kelas')->result();
 		$data['jen'] = $this->models->tampil('tb_jenis_ujian')->result();
@@ -26,7 +26,7 @@ class Bab extends CI_Controller {
 	}
 
 	public function tambah()
-	{
+	{ 
 		$nm_bab = $this->input->post('nm_bab');
 		$matkul = $this->input->post('matkul');
 		// $kelas  = $this->input->post('kelas');

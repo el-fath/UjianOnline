@@ -77,21 +77,21 @@ class Mahasiswa extends CI_Controller {
  	{
 
  		$config['upload_path'] = './gambar/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']  = '10000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+		$config['allowed_types'] = 'gif|jpg|JPG|png|PNG';
+		$config['max_size']      = '1000';
+		$config['max_width']     = '1024';
+		$config['max_height']    = '768';
 		
 		$this->load->library('upload', $config);
 		
 		if ( ! $this->upload->do_upload('foto')){
 			$error = array('error' => $this->upload->display_errors());
 	    	echo "<script>alert('Update foto gagal');</script>";
-			// var_dump($error);
+			var_dump($error);
 		}else{
 			$data = array('upload_data' => $this->upload->data());
 	    	echo "<script>alert('Update foto sukses');</script>";
-	    	// var_dump($this->upload->data());
+	    	var_dump($this->upload->data());
 		}
 
 		$nbi = $nbi;

@@ -25,7 +25,7 @@ class Jujian extends CI_Controller {
 		$nm_ujian = $this->input->post('nm_ujian');
 
 		$data = array(
-			"nm_ujian" => $nm_ujian
+			"nm_ ujian" => $nm_ujian
 		);
 
 		$this->models->tambah('tb_jenis_ujian',$data);

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2017 at 07:49 AM
+-- Generation Time: Mar 01, 2018 at 04:12 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -85,10 +85,12 @@ CREATE TABLE `tb_dosen` (
 --
 
 INSERT INTO `tb_dosen` (`id_dosen`, `nm_dosen`, `username`, `pass`, `fakultas`, `jurusan`, `foto`) VALUES
-(1, 'Ekko', 'ekko', 'untag', 1, 1, 'macan.jpg'),
+(1, 'Ekko', 'infor', 'untag', 1, 1, 'macan.jpg'),
 (2, 'Yani', 'yani', 'untag', 2, 4, 'img_Yani_1510496683.png'),
-(3, 'Fais', 'fais', 'untag', 1, 1, 'gajah1.jpg'),
-(4, 'Reni', 'reni', 'untag', 2, 6, 'jarangoyang.jpg');
+(3, 'Fais', 'fais', 'untag', 1, 1, 'img_Fais_1519740834.jpg'),
+(4, 'Reni', 'reni', 'untag', 2, 6, 'jarangoyang.jpg'),
+(7, 'Laila Jamila', 'laila', 'untag', 2, 4, 'img_7_1519736923.jpg'),
+(9, 'Hasanah', 'Ana', 'untag', 2, 4, 'img_9_1519737323.jpg');
 
 -- --------------------------------------------------------
 
@@ -224,9 +226,10 @@ CREATE TABLE `tb_mahasiswa` (
 --
 
 INSERT INTO `tb_mahasiswa` (`nbi`, `nm_mahasiswa`, `pass`, `foto`, `fakultas`, `jurusan`, `matkul`) VALUES
-(1, 'jono', 'untag', 'tata-surya1.png', 1, 1, '4 5'),
+(1, 'paijo', 'untag', 'tata-surya1.png', 1, 1, '4 5'),
 (2, 'dono', 'untag', 'tata-surya2.jpg', 2, 6, '9'),
-(3, 'joni', 'untag', 'tata-surya3.jpg', 2, 4, '7');
+(3, 'paijo', 'untag', '2.jpg', 1, 2, '7'),
+(4, 'tukiyem', 'untag', '1.jpg', 3, 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -238,23 +241,26 @@ CREATE TABLE `tb_matkul` (
   `id_matkul` int(11) NOT NULL,
   `nm_matkul` varchar(100) DEFAULT NULL,
   `fakultas` int(11) DEFAULT NULL,
-  `jurusan` int(11) DEFAULT NULL
+  `jurusan` int(11) DEFAULT NULL,
+  `kelas` varchar(11) DEFAULT NULL,
+  `dosen` int(11) DEFAULT NULL,
+  `tgl` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_matkul`
 --
 
-INSERT INTO `tb_matkul` (`id_matkul`, `nm_matkul`, `fakultas`, `jurusan`) VALUES
-(1, 'Algoritma', 1, 1),
-(2, 'Pancasila', 2, 5),
-(3, 'Pemrogaman Dasar', 1, 1),
-(4, 'Pemrogaman Lanjut', 1, 1),
-(5, 'Kalkulus', 1, 1),
-(6, 'Aljabar Linier', 1, 1),
-(7, 'Bahasa Inggris', 2, 4),
-(8, 'Bahasa Indonesia', 2, 5),
-(9, 'Jepang', 2, 6);
+INSERT INTO `tb_matkul` (`id_matkul`, `nm_matkul`, `fakultas`, `jurusan`, `kelas`, `dosen`, `tgl`) VALUES
+(1, 'Algoritma', 1, 1, 'A', 1, '2018-02-07 13:25:55'),
+(2, 'Pancasila', 2, 5, 'B', 1, '2018-02-07 13:25:55'),
+(3, 'Pemrogaman Dasar', 1, 1, 'C', 1, '2018-02-07 13:25:55'),
+(4, 'Pemrogaman Lanjut', 1, 1, 'C', 2, '2018-02-07 13:25:55'),
+(5, 'Kalkulus', 1, 1, 'D', 2, '2018-02-07 13:25:55'),
+(6, 'Aljabar Linier', 1, 1, 'B', 1, '2018-02-07 13:25:55'),
+(7, 'Bahasa Inggris', 2, 4, 'B', 3, '2018-02-07 13:25:55'),
+(8, 'Bahasa Indonesia', 2, 5, 'D', 3, '2018-02-07 13:25:55'),
+(9, 'Jepang', 2, 6, 'E', 4, '2018-02-07 13:25:55');
 
 -- --------------------------------------------------------
 
