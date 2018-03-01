@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2018 at 04:12 AM
+-- Generation Time: Mar 01, 2018 at 09:27 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -85,7 +85,7 @@ CREATE TABLE `tb_dosen` (
 --
 
 INSERT INTO `tb_dosen` (`id_dosen`, `nm_dosen`, `username`, `pass`, `fakultas`, `jurusan`, `foto`) VALUES
-(1, 'Ekko', 'infor', 'untag', 1, 1, 'macan.jpg'),
+(1, 'Ekko', 'ekko', 'untag', 1, 1, 'macan.jpg'),
 (2, 'Yani', 'yani', 'untag', 2, 4, 'img_Yani_1510496683.png'),
 (3, 'Fais', 'fais', 'untag', 1, 1, 'img_Fais_1519740834.jpg'),
 (4, 'Reni', 'reni', 'untag', 2, 6, 'jarangoyang.jpg'),
@@ -208,6 +208,27 @@ INSERT INTO `tb_kelas` (`id_kelas`, `nm_kelas`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_krs`
+--
+
+CREATE TABLE `tb_krs` (
+  `id_krs` int(11) NOT NULL,
+  `id_matkul` int(11) DEFAULT NULL,
+  `nbi` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_krs`
+--
+
+INSERT INTO `tb_krs` (`id_krs`, `id_matkul`, `nbi`) VALUES
+(1, 4, 1),
+(2, 1, 1),
+(3, 3, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_mahasiswa`
 --
 
@@ -252,14 +273,14 @@ CREATE TABLE `tb_matkul` (
 --
 
 INSERT INTO `tb_matkul` (`id_matkul`, `nm_matkul`, `fakultas`, `jurusan`, `kelas`, `dosen`, `tgl`) VALUES
-(1, 'Algoritma', 1, 1, 'A', 1, '2018-02-07 13:25:55'),
-(2, 'Pancasila', 2, 5, 'B', 1, '2018-02-07 13:25:55'),
+(1, 'Algoritma', 1, 1, 'A', 3, '2018-02-07 13:25:55'),
+(2, 'Pancasila', 2, 5, 'B', 4, '2018-02-07 13:25:55'),
 (3, 'Pemrogaman Dasar', 1, 1, 'C', 1, '2018-02-07 13:25:55'),
-(4, 'Pemrogaman Lanjut', 1, 1, 'C', 2, '2018-02-07 13:25:55'),
-(5, 'Kalkulus', 1, 1, 'D', 2, '2018-02-07 13:25:55'),
+(4, 'Pemrogaman Lanjut', 1, 1, 'C', 1, '2018-02-07 13:25:55'),
+(5, 'Kalkulus', 1, 1, 'D', 3, '2018-02-07 13:25:55'),
 (6, 'Aljabar Linier', 1, 1, 'B', 1, '2018-02-07 13:25:55'),
-(7, 'Bahasa Inggris', 2, 4, 'B', 3, '2018-02-07 13:25:55'),
-(8, 'Bahasa Indonesia', 2, 5, 'D', 3, '2018-02-07 13:25:55'),
+(7, 'Bahasa Inggris', 2, 4, 'B', 2, '2018-02-07 13:25:55'),
+(8, 'Bahasa Indonesia', 2, 5, 'D', 2, '2018-02-07 13:25:55'),
 (9, 'Jepang', 2, 6, 'E', 4, '2018-02-07 13:25:55');
 
 -- --------------------------------------------------------
@@ -367,6 +388,12 @@ ALTER TABLE `tb_kelas`
   ADD PRIMARY KEY (`id_kelas`);
 
 --
+-- Indexes for table `tb_krs`
+--
+ALTER TABLE `tb_krs`
+  ADD KEY `id` (`id_krs`);
+
+--
 -- Indexes for table `tb_mahasiswa`
 --
 ALTER TABLE `tb_mahasiswa`
@@ -429,6 +456,11 @@ ALTER TABLE `tb_jurusan`
 --
 ALTER TABLE `tb_kelas`
   MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `tb_krs`
+--
+ALTER TABLE `tb_krs`
+  MODIFY `id_krs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_matkul`
 --

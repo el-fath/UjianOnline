@@ -26,6 +26,22 @@ class Matkul extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function materi($matkul)
+	{
+		$where = $this->session->userdata('id_dosen');
+		$data['matk']  = $this->models->tampil_fakjur_w('tb_matkul',$where);
+
+		$data['kel'] = $this->models->tampil('tb_kelas')->result();
+		$data['jen'] = $this->models->tampil('tb_jenis_ujian')->result();
+		$data['mat'] = $this->models->tampil('tb_matkul')->result();
+		
+		$where1 = $matkul;
+		$data['bab'] = $this->models->tampil_join_bab_where($where1);
+		$this->load->view('template/header');
+		$this->load->view('materi',$data);
+		$this->load->view('template/footer');
+	}
+
 	public function tambah()
 	{
 		$nm_matkul = $this->input->post('nm_matkul');

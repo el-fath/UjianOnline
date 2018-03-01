@@ -24,6 +24,17 @@ class Models extends CI_Model {
 	    return $query->result();
 	}
 
+	function tampil_join_bab_where($where)
+	{
+		$this->db->from('tb_bab');
+		$this->db->join('tb_matkul', 'tb_bab.matkul = tb_matkul.id_matkul', 'left');
+		$this->db->join('tb_kelas', 'tb_bab.kelas = tb_kelas.id_kelas', 'left');
+		$this->db->join('tb_jenis_ujian', 'tb_bab.jenis = tb_jenis_ujian.id_j_ujian', 'left');
+		$this->db->where('tb_bab.matkul', $where);
+		$query = $this->db->get();
+	    return $query->result();
+	}
+
 	function tampil_all_soal($where)
 	{
 		$this->db->from('tb_soal');

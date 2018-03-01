@@ -161,8 +161,8 @@
             <li><a href="<?php echo base_url('jujian'); ?>"><span class="menu-text">Jenis Ujian</span></a></li>
           <?php } ?>
           <?php if($this->session->userdata('id_dosen')){ ?>
-            <li><a href="<?php echo base_url('matkul'); ?>"><span class="menu-text">Matkul</span></a></li>
-            <li><a href="<?php echo base_url('bab'); ?>"><span class="menu-text">Materi</span></a></li>
+            <li><a href="<?php echo base_url('matkul'); ?>"><span class="menu-text">Mata Kuliah</span></a></li>
+            <!-- <li><a href="<?php echo base_url('bab'); ?>"><span class="menu-text">Materi</span></a></li> -->
           <?php } ?>
           </ul>
         </li>
