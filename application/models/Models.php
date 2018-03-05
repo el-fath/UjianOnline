@@ -84,7 +84,7 @@ class Models extends CI_Model {
 
 	function tampil_fakjur_2($table,$where)
 	{	
-		$this->db->select('tb_matkul.id_matkul,tb_matkul.nm_matkul,tb_fakultas.nm_fakultas,tb_jurusan.nm_jurusan,id_krs');
+		$this->db->select('tb_matkul.id_matkul,tb_matkul.nm_matkul,tb_fakultas.nm_fakultas,tb_jurusan.nm_jurusan,id_krs,nbi');
 		$this->db->from($table);
 		$this->db->join('tb_fakultas', $table.'.fakultas = tb_fakultas.kd_fakultas', 'left');
 		$this->db->join('tb_jurusan', $table.'.jurusan = tb_jurusan.kd_jurusan', 'left');

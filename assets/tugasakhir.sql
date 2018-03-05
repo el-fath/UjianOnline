@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2018 at 09:27 AM
+-- Generation Time: Mar 05, 2018 at 08:35 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -223,8 +223,7 @@ CREATE TABLE `tb_krs` (
 
 INSERT INTO `tb_krs` (`id_krs`, `id_matkul`, `nbi`) VALUES
 (1, 4, 1),
-(2, 1, 1),
-(3, 3, 1);
+(8, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -249,7 +248,7 @@ CREATE TABLE `tb_mahasiswa` (
 INSERT INTO `tb_mahasiswa` (`nbi`, `nm_mahasiswa`, `pass`, `foto`, `fakultas`, `jurusan`, `matkul`) VALUES
 (1, 'paijo', 'untag', 'tata-surya1.png', 1, 1, '4 5'),
 (2, 'dono', 'untag', 'tata-surya2.jpg', 2, 6, '9'),
-(3, 'paijo', 'untag', '2.jpg', 1, 2, '7'),
+(3, 'paimen', 'untag', '2.jpg', 1, 1, '7'),
 (4, 'tukiyem', 'untag', '1.jpg', 3, 8, NULL);
 
 -- --------------------------------------------------------
@@ -460,7 +459,7 @@ ALTER TABLE `tb_kelas`
 -- AUTO_INCREMENT for table `tb_krs`
 --
 ALTER TABLE `tb_krs`
-  MODIFY `id_krs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_krs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tb_matkul`
 --

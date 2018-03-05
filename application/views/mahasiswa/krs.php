@@ -1,7 +1,7 @@
 <section  id="services-sec">
     <div class="container">
         <!-- <div class="row "> -->
-            <h2 align="center">Nama Matkul</h2>
+            <h2 align="center">Nama Matkul <?php echo $this->session->userdata("nbi"); ?></h2>
             <form id="form-edit" action="<?php echo base_url('mahasiswa/proses_krs/'.$this->session->userdata("nbi"))?>" method="POST">
             <div class="table-responsive">
             <table border="1" class="table table-bordered table-striped table-hover">
