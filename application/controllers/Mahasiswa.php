@@ -143,12 +143,16 @@ class Mahasiswa extends CI_Controller {
  		if(!$this->session->userdata('nbi')){
 			redirect('login');
 		}
-		$where = $jurusan;
-		$w = array('nbi' => $this->session->userdata('nbi'));
-		$data['mat'] = $this->models->tampil_fakjur_2('tb_matkul',$where);
+		$where = $this->session->userdata('nbi');
+		$data['krs'] = $this->models->tampil_krs('tb_krs',$where); 
+		
+		// $where = $jurusan;
+		// $w = array('nbi' => $this->session->userdata('nbi'));
+		// $data['mat'] = $this->models->tampil_fakjur_2('tb_matkul',$where);
 
  		$this->load->view('mahasiswa/template/header');
- 		$this->load->view('mahasiswa/krs',$data);
+ 		$this->load->view('mahasiswa/matkul',$data);
+ 		// $this->load->view('mahasiswa/krs',$data);
  		$this->load->view('mahasiswa/template/footer');
  	}
 

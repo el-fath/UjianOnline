@@ -24,7 +24,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-countdown/2.0.2/jquery.countdown.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/sweetalert-master/dist/sweetalert.css">
-
+    <script src="<?php echo base_url();?>assets/sweetalert-master/dist/sweetalert.min.js"></script>
+    
     <script src="<?php echo base_url();?>assets/js/jquery-2.2.2.js"></script>
     <script src="<?php echo base_url(); ?>assets/assets-user/plugins/jquery-1.10.2.js"></script>
 

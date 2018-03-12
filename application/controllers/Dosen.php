@@ -46,7 +46,7 @@ class Dosen extends CI_Controller {
 		}else{
 			$data = array('upload_data' => $this->upload->data());
 	    	echo "<script>alert('Upload foto sukses');</script>";
-	    	var_dump($this->upload->data());
+	    	// var_dump($this->upload->data());
 		}
 
 		$foto = $this->upload->data();
@@ -85,39 +85,40 @@ class Dosen extends CI_Controller {
  	{
 		$id_dosen = $id_dosen;
 		$nm_dosen = $this->input->post('nm_dosen');
-		// $gambar = $this->input->post('foto');
 		
  		$nmfile = "img_".$nm_dosen."_".time();
 		
 		$config['upload_path']   = './gambar/dosen/'.$nm_dosen;
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']      = '1000';
+		$config['max_size']      = '5000';
 		$config['max_width']     = '5000';
 		$config['max_height']    = '5000';
 		$config['file_name']     = $nmfile;
-		
+
 		$this->load->library('upload', $config);
-		
+			
 		if ( ! $this->upload->do_upload('foto')){
 			$error = array('error' => $this->upload->display_errors());
-	    	echo "<script>alert('Update foto gagal');</script>";
+	    	echo "<script>alert('Upload foto gagal');</script>";
 			var_dump($error);
+			var_dump($gambar);
 		}else{
 			$data = array('upload_data' => $this->upload->data());
-	    	echo "<script>alert('Update foto sukses');</script>";
-	    	var_dump($this->upload->data());
+	    	echo "<script>alert('Upload foto sukses');</script>";
+			var_dump($gambar);
+	    	// var_dump($this->upload->data());
 		}
+
+		$foto = $this->upload->data();
 
 		$username = $this->input->post('username');
 		$fakultas = $this->input->post('fakultas');
 		$jurusan  = $this->input->post('jurusan');
 		$pass     = $this->input->post('pass');
 
-		$foto = $this->upload->data();
-
 		$where = array('id_dosen' => $id_dosen);
-		if($gambar == "") {
-		// if($foto['file_name'] == "") {
+
+		if($foto['file_name'] == "") {
 			$data  = array(
 				"nm_dosen" => $nm_dosen,
 				"username" => $username,
@@ -137,6 +138,8 @@ class Dosen extends CI_Controller {
 		}
 
  		$this->models->update($where,$data,'tb_dosen');
+ 		// echo json_encode(array('Code' => 'Success','Message' => 'Success jon' ));
+ 		
  		// redirect('dosen');
  	}
 

@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/misc/owl-carousel/owl.carousel.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/bower/animate.css/animate.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/landing-page.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/sweetalert-master/dist/sweetalert.css">
+
   <title>Ujian Online S1</title>
 </head>
 <body data-spy="scroll" data-target=".navbar-fixed-top" data-offset="60">
@@ -22,7 +24,7 @@
         </button>
         <h2 align="center">Login Sebagai Dosen</h2>
       </div>
-      <form id="tambah-div" action="<?php echo base_url('login/aksi_login_dosen') ?>" method="POST">
+      <form id="login_dsn" action="<?php echo base_url('login/aksi_login_dosen') ?>" method="POST">
       <div class="modal-body">
       <input type="text" class="form-control" required="" placeholder="Username" name="username">
       </div>
@@ -45,7 +47,7 @@
         </button>
         <h2 align="center">Login Sebagai Mahasiswa</h2>
       </div>
-      <form id="tambah-div" action="<?php echo base_url('login/aksi_login_mahasiswa') ?>" method="POST">
+      <form id="frm_mhs" action="<?php echo base_url('login/aksi_login_mahasiswa') ?>" method="POST">
       <div class="modal-body">
       <input type="number" class="form-control" required="" placeholder="NBI" name="nbi">
       </div>
@@ -68,7 +70,7 @@
         </button>
         <h2 align="center">Login Sebagai Admin</h2>
       </div>
-      <form id="tambah-div" action="<?php echo base_url('login/aksi_login_admin') ?>" method="POST">
+      <form id="login_adm" action="<?php echo base_url('login/aksi_login_admin') ?>" method="POST">
       <div class="modal-body">
       <input type="text" class="form-control" required="" placeholder="Username" name="username">
       </div>
@@ -194,6 +196,8 @@
     <img src="<?php echo base_url(); ?>assets/assets/images/landing-page/puff.svg" width="50" alt="">
   </div>
   <script src="<?php echo base_url(); ?>assets/libs/bower/jquery/dist/jquery.js"></script>
+  <script src="<?php echo base_url();?>assets/sweetalert-master/dist/sweetalert.min.js"></script>
+  
   <script src="<?php echo base_url(); ?>assets/libs/bower/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
   <script src="<?php echo base_url(); ?>assets/libs/misc/owl-carousel/owl.carousel.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/libs/bower/smooth-scroll/dist/js/smooth-scroll.min.js"></script>
@@ -255,6 +259,99 @@
         if (direction === 'down') $(this.element).addClass('fadeInUp');
         else $(this.element).removeClass('fadeInUp');
       }, { offset: '96%' });
+
+      $('#login_dsn').on('submit',function(e) {
+        e.preventDefault();
+        var formData = new FormData( $("#login_dsn")[0]);
+          $.ajax({
+            url: $("#login_dsn").attr('action'), //nama action script php sobat
+              method:'POST',
+              data:new FormData(this),
+              contentType: false,
+              processData: false,
+              dataType: 'json',
+              success:function(data){
+                console.log(data);
+                if (data.Code == 'Error') {
+                  swal("error!", data.Message, "error");
+                  // alert(data.Message);
+                }else{
+                  swal({
+                  title: "Succes",
+                  text: data.Message,
+                  type: "success",
+                  },function(){
+                  window.location.href = "<?php echo base_url('matkul'); ?>"
+                  });
+                }
+              },
+              error:function(data){
+                alert("Gagal Bro")
+              },
+          });
+        });
+
+      $('#frm_mhs').on('submit',function(e) {
+        e.preventDefault();
+        var formData = new FormData( $("#frm_mhs")[0]);
+          $.ajax({
+            url: $("#frm_mhs").attr('action'), //nama action script php sobat
+              method:'POST',
+              data:new FormData(this),
+              contentType: false,
+              processData: false,
+              dataType: 'json',
+              success:function(data){
+                console.log(data);
+                if (data.Code == 'Error') {
+                  swal("error!", data.Message, "error");
+                  // alert(data.Message);
+                }else{
+                  swal({
+                  title: "Succes",
+                  text: data.Message,
+                  type: "success",
+                  },function(){
+                  window.location.href = "<?php echo base_url('mahasiswa/user'); ?>"
+                  });
+                }
+              },
+              error:function(data){
+                alert("Gagal Bro")
+              },
+          });
+        });
+
+        $('#login_adm').on('submit',function(e) {
+        e.preventDefault();
+        var formData = new FormData( $("#login_adm")[0]);
+          $.ajax({
+            url: $("#login_adm").attr('action'), //nama action script php sobat
+              method:'POST',
+              data:new FormData(this),
+              contentType: false,
+              processData: false,
+              dataType: 'json',
+              success:function(data){
+                console.log(data);
+                if (data.Code == 'Error') {
+                  swal("error!", data.Message, "error");
+                  // alert(data.Message);
+                }else{
+                  swal({
+                  title: "Succes",
+                  text: data.Message,
+                  type: "success",
+                  },function(){
+                  window.location.href = "<?php echo base_url('dosen'); ?>"
+                  });
+                }
+              },
+              error:function(data){
+                alert("Gagal Bro")
+              },
+          });
+        });
     });
 
     autoPlayYouTubeModal = function() {
@@ -280,6 +377,9 @@
       });
       $selector.height(max);
     };
+
+
+
   </script>
 </body>
 

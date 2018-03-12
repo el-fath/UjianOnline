@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2018 at 08:35 AM
+-- Generation Time: Mar 12, 2018 at 08:47 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -87,9 +87,9 @@ CREATE TABLE `tb_dosen` (
 INSERT INTO `tb_dosen` (`id_dosen`, `nm_dosen`, `username`, `pass`, `fakultas`, `jurusan`, `foto`) VALUES
 (1, 'Ekko', 'ekko', 'untag', 1, 1, 'macan.jpg'),
 (2, 'Yani', 'yani', 'untag', 2, 4, 'img_Yani_1510496683.png'),
-(3, 'Fais', 'fais', 'untag', 1, 1, 'img_Fais_1519740834.jpg'),
+(3, 'Fais', 'fais', 'untag', 1, 1, 'img_Fais_1520608227.jpg'),
 (4, 'Reni', 'reni', 'untag', 2, 6, 'jarangoyang.jpg'),
-(7, 'Laila Jamila', 'laila', 'untag', 2, 4, 'img_7_1519736923.jpg'),
+(7, 'Laila Jamila', 'laila', 'untag', 2, 4, 'img_Laila Jamila_1520423348'),
 (9, 'Hasanah', 'Ana', 'untag', 2, 4, 'img_9_1519737323.jpg');
 
 -- --------------------------------------------------------
@@ -223,7 +223,9 @@ CREATE TABLE `tb_krs` (
 
 INSERT INTO `tb_krs` (`id_krs`, `id_matkul`, `nbi`) VALUES
 (1, 4, 1),
-(8, 4, 3);
+(8, 2, 3),
+(9, 5, 1),
+(10, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -459,7 +461,7 @@ ALTER TABLE `tb_kelas`
 -- AUTO_INCREMENT for table `tb_krs`
 --
 ALTER TABLE `tb_krs`
-  MODIFY `id_krs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_krs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tb_matkul`
 --

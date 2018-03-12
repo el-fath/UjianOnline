@@ -14,6 +14,15 @@ class Models extends CI_Model {
 		return $this->db->get_where($table,$where);
 	}
 
+	function tampil_krs($table,$where)
+	{
+		$this->db->from($table);
+		$this->db->join('tb_matkul', $table.'.id_matkul = tb_matkul.id_matkul', 'left');
+		$this->db->where('nbi',$where);
+		$query = $this->db->get();
+	    return $query->result();
+	}
+
 	function tampil_join_bab()
 	{
 		$this->db->from('tb_bab');

@@ -63,6 +63,39 @@ $(document).ready(function(){
         };
     };
 </script>
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+        $('#form-edit').on('submit',function(e) {
+        e.preventDefault();
+        var formData = new FormData( $("#form-edit")[0]);
+        $.ajax({
+          url: $("#form-edit").attr('action'), //nama action script php sobat
+            method:'POST',
+            data:new FormData(this),
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success:function(data){
+            console.log(data);
+            if (data.Code == 'Error') {
+                swal("error!", data.Message, "error");
+            }else{
+                swal({
+                    title: "Succes",
+                    text: data.Message,
+                    type: "success",
+                },function(){
+                window.location.href = "<?php echo base_url('dosen'); ?>"
+            });}
+            },
+            error:function(data){
+                swal("Oops...", "Something went wrong :(", "error");
+            },
+        });
+        // e.preventDefault(); 
+        });
+    });
+</script> -->
 <script type="text/javascript">
     $(document).ready(function(){
         $('#form-edit').on('submit',function(e) {

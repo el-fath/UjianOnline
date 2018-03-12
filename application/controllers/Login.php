@@ -30,9 +30,13 @@ class Login extends CI_Controller {
 				'status'   => "login"
 			);
 			$this->session->set_userdata($data_session);
-			redirect(base_url('matkul'));
+			$arrayResponse = array('Code' => "Succees",'Message' => "Succees Bro", );
+			echo json_encode($arrayResponse);
+			// redirect(base_url('matkul'));
 		}else{
-	    	echo "<script>alert('Username atau Password salah !');</script>";
+	    	$arrayResponse = array('Code' => "Error",'Message' => "Login Gagal", );
+			echo json_encode($arrayResponse);
+	    	// echo "<script>alert('Username atau Password salah !');</script>";
 			// redirect(base_url("login"));
 		}
 	}
@@ -57,9 +61,12 @@ class Login extends CI_Controller {
 				'status'   => "login"
 			);
 			$this->session->set_userdata($data_session);
-			redirect(base_url('mahasiswa/user'));
+
+			$arrayResponse = array('Code' => "Succees",'Message' => "Succees Bro", );
+			echo json_encode($arrayResponse);
 		}else{
-	    	echo "<script>alert('NBI atau Password salah !');</script>";
+			$arrayResponse = array('Code' => "Error",'Message' => "Login Gagal", );
+			echo json_encode($arrayResponse);
 			// redirect(base_url("login"));
 		}
 	}
@@ -81,9 +88,13 @@ class Login extends CI_Controller {
 				'status'   => "login"
 			);
 			$this->session->set_userdata($data_session);
-			redirect(base_url("dosen"));
+			
+			$arrayResponse = array('Code' => "Succees",'Message' => "Succees Bro", );
+			echo json_encode($arrayResponse);
+			// redirect(base_url("dosen"));
 		}else{
-	    	echo "<script>alert('Username atau Password salah !');</script>";
+	    	$arrayResponse = array('Code' => "Error",'Message' => "Login Gagal", );
+			echo json_encode($arrayResponse);
 			// redirect(base_url("login"));
 		}
 	}
