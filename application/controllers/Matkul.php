@@ -110,6 +110,21 @@ class Matkul extends CI_Controller {
 	    echo $data;
 	}
 
+	public function ambil_matkul()
+	{
+		$id_matkul = $this->input->post('id_matkul');
+		$where = array (
+			'id_matkul' => $id_matkul
+		);
+		$data['mtkl'] = $this->models->edit($where,'tb_matkul')->result();
+		// var_dump($data['mtkl']);
+		if ($data['mtkl'] != NULL) {
+			echo "sukses";
+		}else{
+			echo "gagal";
+		}
+	}
+
 }
 
 /* End of file  */

@@ -291,7 +291,7 @@
           });
         });
 
-      $('#frm_mhs').on('submit',function(e) {
+        $('#frm_mhs').on('submit',function(e) {
         e.preventDefault();
         var formData = new FormData( $("#frm_mhs")[0]);
           $.ajax({

@@ -7,14 +7,14 @@
             </button>
         <center><h5>Masukkan Kode Kelas</h5></center>
         </div> -->
-        <form id="tambah-div" action="<?php echo base_url('dosen/tambah') ?>" method="POST" enctype="multipart/form-data">
+        <form id="tambah_matkul" action="<?php echo base_url('matkul/ambil_matkul') ?>" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
             <!-- <center><h3>Masukkan Kode Kelas</h3></center>
             <input type="text" class="form-control input-sm" required="" placeholder="" name="nm_dosen"> -->
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Masukkan Kode Kelas">
+              <input type="text" class="form-control" name="id_matkul" placeholder="Masukkan Kode Kelas">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Daftar</button>
+                <button class="btn btn-primary" type="submit">Daftar</button>
               </span>
             </div>
         </div>
@@ -48,3 +48,39 @@
         <!-- </div> -->
     </div>
 </section>
+<!-- <script>
+    $(function() {
+        $('#tambah_matkul').on('submit',function(e) {
+            e.preventDefault();
+            var formData = new FormData( $("#tambah_matkul")[0]);
+              $.ajax({
+                url: $("#tambah_matkul").attr('action'), //nama action script php sobat
+                  method:'POST',
+                  data:new FormData(this),
+                  contentType: false,
+                  processData: false,
+                  dataType: 'json',
+                  success:function(data){
+                    console.log(data);
+                    if (data.Code == 'Error') {
+                      swal("error!", data.Message, "error");
+                      alert(data.Message);
+                    }else{
+                      swal({
+                      title: "Succes",
+                      text: data.Message,
+                      type: "success",
+                      };
+                      ,function(){
+                      window.location.href = "<?php echo base_url('dosen'); ?>"
+                      })
+                      ;
+                    }
+                  },
+                  error:function(data){
+                    alert("Gagal Bro")
+                  },
+              });
+        });
+    });
+</script> -->
