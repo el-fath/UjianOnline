@@ -33,7 +33,7 @@ class Matkul extends CI_Controller {
 
 		$data['kel'] = $this->models->tampil('tb_kelas')->result();
 		$data['jen'] = $this->models->tampil('tb_jenis_ujian')->result();
-		$data['mat'] = $this->models->tampil('tb_matkul')->result();
+		$data['mat'] = $this->models->tampil_matkul('tb_matkul');
 		
 		$where1 = $matkul;
 		$data['bab'] = $this->models->tampil_join_bab_where($where1);
@@ -66,7 +66,7 @@ class Matkul extends CI_Controller {
 		$where = array('id_matkul' => $id_matkul);
 		$data['fak']  = $this->models->tampil('tb_fakultas')->result();
 		$data['jur']  = $this->models->tampil('tb_jurusan')->result();
-		$data['kel'] = $this->models->tampil('tb_kelas')->result();
+		$data['kel']  = $this->models->tampil('tb_kelas')->result();
 		$data['matk'] = $this->models->edit($where,'tb_matkul')->result();
 		$this->load->view('template/header');
 		$this->load->view('e_matkul',$data);
@@ -110,21 +110,34 @@ class Matkul extends CI_Controller {
 	    echo $data;
 	}
 
-	public function ambil_matkul()
+	public function lihat_anggota($matkul)
 	{
-		$id_matkul = $this->input->post('id_matkul');
-		$where = array (
-			'id_matkul' => $id_matkul
-		);
-		$data['mtkl'] = $this->models->edit($where,'tb_matkul')->result();
-		// var_dump($data['mtkl']);
-		if ($data['mtkl'] != NULL) {
-			echo "sukses";
-		}else{
-			echo "gagal";
-		}
+		$where = array('id_matkul' => $matkul );
+		$data['la'] = $this->models->tampil_anggota('tb_krs',$where);
+		// echo"<pre>";
+		// var_dump($data['la']);
+		$this->load->view('template/header');
+		$this->load->view('lihat_anggota',$data);
+		$this->load->view('template/footer');
 	}
 
+	public function terima($id_krs)
+	{
+		// echo $id_krs;
+		$where = array('id_krs' => $id_krs);
+		$data  = array('status' => 'disetujui');
+		$this->models->update($where,$data,'tb_krs');
+		// redirect('matkul/lihat_anggota','refresh');
+	}
+
+	public function tolak($id_krs)
+	{
+		// echo $id_krs;
+		$where = array('id_krs' => $id_krs);
+		$data  = array('status' => 'ditolak');
+		$this->models->update($where,$data,'tb_krs');
+		// redirect('matkul/lihat_anggota','refresh');
+	}
 }
 
 /* End of file  */

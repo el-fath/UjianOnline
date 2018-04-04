@@ -9,6 +9,33 @@ class Models extends CI_Model {
 		parent::__construct();		
 	}
 
+	function tampil($table)
+	{
+		return $this->db->get($table);
+	}
+
+	function tambah($table,$data)
+	{
+		$this->db->insert($table,$data);
+	}
+
+	function edit($where,$table)
+	{
+		return $this->db->get_where($table,$where);
+	}
+
+	function update($where,$data,$table)
+	{
+		$this->db->where($where);
+		$this->db->update($table,$data);
+	}
+
+	function hapus($where,$table)
+	{
+		$this->db->where($where);
+		$this->db->delete($table);
+	}
+
 	function cek_login($table,$where)
 	{
 		return $this->db->get_where($table,$where);
@@ -26,7 +53,7 @@ class Models extends CI_Model {
 	function tampil_join_bab()
 	{
 		$this->db->from('tb_bab');
-		$this->db->join('tb_matkul', 'tb_bab.matkul = tb_matkul.id_matkul', 'left');
+		$this->db->join('tb_matkul', 'tb_bab.matkul = tb_matkul.id_kelasmatkul', 'left');
 		$this->db->join('tb_kelas', 'tb_bab.kelas = tb_kelas.id_kelas', 'left');
 		$this->db->join('tb_jenis_ujian', 'tb_bab.jenis = tb_jenis_ujian.id_j_ujian', 'left');
 		$query = $this->db->get();
@@ -103,32 +130,43 @@ class Models extends CI_Model {
 	    return $query->result();
 	}
 
-	function tampil($table)
-	{
-		return $this->db->get($table);
+	function tampil_matkul($table)
+	{	
+		$this->db->from($table);
+		$this->db->join('tb_kelas', $table.'.kelas = tb_kelas.id_kelas', 'left');
+		$query = $this->db->get();
+	    return $query->result();
 	}
 
-	function tambah($table,$data)
+	function tampil_anggota($table,$where)
 	{
-		$this->db->insert($table,$data);
-	}
-
-	function edit($where,$table)
-	{
-		return $this->db->get_where($table,$where);
-	}
-
-	function update($where,$data,$table)
-	{
+		$this->db->from($table);
+		$this->db->join('tb_mahasiswa', $table.'.nbi = tb_mahasiswa.nbi', 'left');
 		$this->db->where($where);
-		$this->db->update($table,$data);
+		$query = $this->db->get();
+	    return $query->result();
 	}
 
-	function hapus($where,$table){
+	function tampil_bab_soal($table,$where)
+	{
+		$this->db->from($table);
+		$this->db->join('tb_bab', $table.'.id_matkul = tb_bab.matkul', 'inner');
+		$this->db->join('tb_matkul', $table.'.id_matkul = tb_matkul.id_matkul', 'inner');
+		$this->db->join('tb_kelas', 'tb_matkul.kelas = tb_kelas.id_kelas', 'inner');
+		$this->db->join('tb_jenis_ujian', 'tb_bab.jenis = tb_jenis_ujian.id_j_ujian', 'inner');
 		$this->db->where($where);
-		$this->db->delete($table);
+		$query = $this->db->get();
+	    return $query->result();
 	}
 
+	function tampil_riwayat($table,$where)
+	{
+		$this->db->from($table);
+		$this->db->join('tb_mahasiswa', $table.'.mahasiswa = tb_mahasiswa.nbi', 'left');
+		$this->db->where($where);
+		$query = $this->db->get();
+	    return $query->result();
+	}
 }
 
 /* End of file  */

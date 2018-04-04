@@ -24,10 +24,12 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-countdown/2.0.2/jquery.countdown.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/sweetalert-master/dist/sweetalert.css">
-    <script src="<?php echo base_url();?>assets/sweetalert-master/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/jquery-ui.css">
     
     <script src="<?php echo base_url();?>assets/js/jquery-2.2.2.js"></script>
     <script src="<?php echo base_url(); ?>assets/assets-user/plugins/jquery-1.10.2.js"></script>
+    <script src="<?php echo base_url(); ?>assets/libs/bower/jquery/dist/jquery.js"></script>
+    <script src="<?php echo base_url(); ?>assets/libs/bower/jquery-ui/jquery-ui.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-countdown/2.0.2/jquery.plugin.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-countdown/2.0.2/jquery.countdown.min.js"></script>
@@ -43,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Welcome, <?php echo $this->session->userdata("nama"); ?></a>
+                <a class="navbar-brand" href="<?php echo(base_url('mahasiswa/user')); ?>">Welcome, <?php echo $this->session->userdata("nama"); ?></a>
                 <a class="navbar-brand" href="#"></a>
             </div>
             <div class="navbar-collapse collapse">

@@ -54,7 +54,7 @@ class Login extends CI_Controller {
 			$data_session = array(
 				'nbi' 	   => $nbi,
 				'nama'     => $cek->nm_mahasiswa,
-				'matkul'   => $cek->matkul,
+				// 'matkul'   => $cek->matkul,
 				'fakultas' => $cek->fakultas,
 				'jurusan'  => $cek->jurusan,
 				'foto'     => $cek->foto,

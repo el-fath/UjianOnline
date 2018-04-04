@@ -7,7 +7,7 @@
             </button>
         <center><h5>Masukkan Kode Kelas</h5></center>
         </div> -->
-        <form id="tambah_matkul" action="<?php echo base_url('matkul/ambil_matkul') ?>" method="POST" enctype="multipart/form-data">
+        <form id="tambah_matkul" action="<?php echo base_url('mahasiswa/ambil_matkul') ?>" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
             <!-- <center><h3>Masukkan Kode Kelas</h3></center>
             <input type="text" class="form-control input-sm" required="" placeholder="" name="nm_dosen"> -->
@@ -35,11 +35,13 @@
                 <!-- <th>Id Matkul</th> -->
                 <th>No</th>
                 <th>Mata Kuliah</th>
+                <th>status</th>
                 </tr>
                 <?php $no=0; foreach($krs as $k){ $no++; ?>
                 <tr>
                 <td><?php echo $no ?></td>
                 <td><?php echo $k->nm_matkul ?></td>
+                <td><?php echo $k->status ?></td>
                 </tr>
                 <?php } ?>
             </table>
@@ -48,8 +50,8 @@
         <!-- </div> -->
     </div>
 </section>
-<!-- <script>
-    $(function() {
+<script>
+    $(document).ready(function(){
         $('#tambah_matkul').on('submit',function(e) {
             e.preventDefault();
             var formData = new FormData( $("#tambah_matkul")[0]);
@@ -63,24 +65,22 @@
                   success:function(data){
                     console.log(data);
                     if (data.Code == 'Error') {
-                      swal("error!", data.Message, "error");
-                      alert(data.Message);
+                      swal("Error..!", data.Message, "error");
+                      // alert(data.Message);
                     }else{
                       swal({
                       title: "Succes",
                       text: data.Message,
                       type: "success",
-                      };
-                      ,function(){
-                      window.location.href = "<?php echo base_url('dosen'); ?>"
-                      })
-                      ;
+                      },function(){
+                      window.location.href = "<?php echo base_url('mahasiswa/krs/').$this->session->userdata("jurusan"); ?>"
+                      });
                     }
                   },
                   error:function(data){
                     alert("Gagal Bro")
                   },
-              });
+            });
         });
     });
-</script> -->
+</script>

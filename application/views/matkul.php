@@ -36,7 +36,7 @@ $(document).ready(function(){
       <label>Kelas</label>
       <select class="form-control" name="kelas">
         <?php foreach($kel as $k){ ?>
-        <option value="<?php echo $k->nm_kelas ?>"><?php echo $k->nm_kelas ?></option>
+        <option value="<?php echo $k->id_kelas ?>"><?php echo $k->nm_kelas ?></option>
         <?php } ?>
       </select>
       </div>
@@ -75,14 +75,21 @@ $(document).ready(function(){
             <?php foreach($mat as $m){ ?>
             <tr>
             <td><?php echo $m->id_matkul ?></td>
-            <td><?php echo $m->nm_matkul ?> - <?php echo $m->kelas ?></td>
+            <td><?php echo $m->nm_matkul ?> - <?php echo $m->nm_kelas ?></td>
             <td><?php echo $m->nm_fakultas ?> - <?php echo $m->nm_jurusan ?></td>
             <td><?php echo $m->tgl ?></td>
             <td>
-                <a href="<?php echo base_url('matkul/edit/'.$m->id_matkul) ?>"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></button></a>
-                <a href="<?php echo base_url('matkul/hapus/'.$m->id_matkul) ?>" class="hapus"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button></a>
-                <a href="<?php echo base_url('matkul/materi/'.$m->id_matkul) ?>"><button type="button" class="btn btn-primary btn-sm"><i class="fa fa-folder-open-o"></i></button></a>
-                </td>
+              <div class="btn-group" role="group">
+                <a href="<?php echo base_url('matkul/lihat_anggota/'.$m->id_matkul) ?>" type="button" class="btn btn-success btn-sm"><i class="fa fa-check-square-o"></i></a>
+                <a href="<?php echo base_url('matkul/materi/'.$m->id_matkul) ?>" type="button" class="btn btn-primary btn-sm"><i class="fa fa-folder-open-o"></i></a>
+                <a href="<?php echo base_url('matkul/edit/'.$m->id_matkul) ?>" type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                <a href="<?php echo base_url('matkul/hapus/'.$m->id_matkul) ?>" type="button" class="btn btn-danger btn-sm hapus"><i class="fa fa-trash"></i></a>
+              </div>
+                <!-- <a href="<?php ?>"><button type="button" class="btn btn-success btn-xs"><i class="fa fa-check-square-o"></i></button></a>
+                <a href="<?php echo base_url('matkul/materi/'.$m->id_matkul) ?>"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-folder-open-o"></i></button></a>
+                <a href="<?php echo base_url('matkul/edit/'.$m->id_matkul) ?>"><button type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></button></a>
+                <a href="<?php echo base_url('matkul/hapus/'.$m->id_matkul) ?>" class="hapus"><button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a> -->
+            </td>
             </tr>
             <?php } ?>
             </tbody>

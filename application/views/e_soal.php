@@ -47,6 +47,7 @@ $(document).ready(function(){
                         <?php } ?>
                         </select>
                         <label>Soal :</label>
+                        <input type="hidden" value="<?php echo $s->id_bab ?>" name="id_bab">
                         <textarea id="editor1" name="soal" required=""><?php echo $s->soal ?></textarea>
                         <br>
                         <div id='jenisnya'>
@@ -70,9 +71,21 @@ $(document).ready(function(){
                         </div>                            
                         <?php } elseif ($s->id_j_soal==2) { ?>
                         <label>Jawaban</label>
-                        <div class="checkbox checkbox-primary">
+                        <label>Isikan urutan yang salah yang akan dijadikan soal</label>
+                        <br>
+                        <label>1.</label>
+                        <textarea id='editor2' name='pil_a'><?php echo $s->pil_a ?></textarea>
+                        <label>2.</label>
+                        <textarea id='editor3' name='pil_b'><?php echo $s->pil_b ?></textarea>
+                        <label>3.</label>
+                        <textarea id='editor4' name='pil_c'><?php echo $s->pil_c ?></textarea>
+                        <label>4.</label>
+                        <textarea id='editor5' name='pil_d'><?php echo $s->pil_d ?></textarea>
+                        <label>Jawaban Urutan Yang Benar | contoh : 3214</label>
+                        <input type='' class='form-control' name='jawaban[]' value='<?php echo $s->jawaban ?>'>
                             <!-- <?php $j = explode(',',$s->jawaban); ?> -->
                             <!-- <?php print_r($j); ?> -->
+                        <!-- <div class="checkbox checkbox-primary">
                             <input type="checkbox" name="jawaban[]" value = "A" id="custome-checkbox1" <?=$s->jawaban == 'A' || $s->jawaban == 'A B' || $s->jawaban == 'A C' || $s->jawaban == 'A D' ? 'checked':'' ?>/>
                             <label for="custome-checkbox1">Pil A :</label>
                             <textarea id="editor2" name="pil_a"><?php echo $s->pil_a ?></textarea>
@@ -85,7 +98,7 @@ $(document).ready(function(){
                             <input type="checkbox" name="jawaban[]" value = "D" id="custome-checkbox4" <?=$s->jawaban == 'D' || $s->jawaban == 'A D' || $s->jawaban == 'B D' || $s->jawaban == 'C D' ? 'checked':'' ?>/>
                             <label for="custome-checkbox4">Pil D :</label>
                             <textarea id="editor5" name="pil_d"><?php echo $s->pil_d ?></textarea>
-                        </div>
+                        </div> -->
                         <?php } elseif ($s->id_j_soal==3) { ?>
                         <label>Jawaban</label>
                         <br>
@@ -100,7 +113,7 @@ $(document).ready(function(){
                         <br>
                         <?php } elseif ($s->id_j_soal==4) { ?>
                         <label>Jawaban</label>
-                        <label>akan langsung di isi oleh mahasiswa, dan anda akan bisa menilai langsung setelah soal di kerjakan</label>
+                        <textarea class="form-control" name="jawaban[]"><?php echo $s->jawaban ?></textarea>
                         <?php } elseif ($s->id_j_soal==5) { ?>
                         <label>Isikan urutan yang salah yang akan dijadikan soal</label>
                         <br>
@@ -141,27 +154,28 @@ $(document).ready(function(){
         for (instance in CKEDITOR.instances) {
             CKEDITOR.instances[instance].updateElement();
         } 
+        console.log("asd",formData);
         $.ajax({
           url: $("#form-edit").attr('action'), //nama action script php sobat
             method:'POST',
-            data:new FormData(this),
+            data: formData,
             contentType: false,
             processData: false,
             success:function(data){
-            console.log(data);
+            
           swal({
                 title: "Succes",
                 text: "Edit Data Berhasil",
                 type: "success",
                 },function(){
-                window.location.href = "<?php echo base_url('bab'); ?>"
+                window.location.href = "<?php echo base_url('bab/all_soal/'.$id_bab); ?>"
                 });
             },
             error:function(data){
             swal("Oops...", "Something went wrong :(", "error");
             },
         });
-        e.preventDefault(); 
+        // e.preventDefault(); 
         });
     });
 </script>

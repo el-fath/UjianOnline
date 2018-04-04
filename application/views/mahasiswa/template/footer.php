@@ -1,6 +1,6 @@
 </body>
 <footer id="footer">
-	<script src="<?php echo base_url();?>assets/sweetalert-master/dist/sweetalert.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/sweetalert-master/dist/sweetalert.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/assets-user/plugins/bootstrap.min.js"></script>  
     <script src="<?php echo base_url(); ?>assets/assets-user/plugins/jquery.prettyPhoto.js"></script>    
     <script src="<?php echo base_url(); ?>assets/assets-user/js/custom.js"></script>

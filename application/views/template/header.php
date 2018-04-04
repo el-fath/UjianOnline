@@ -17,17 +17,17 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/bootstrap.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/core.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/app.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/jquery-ui.css">
 
   <link href="<?php echo base_url(); ?>assets/datatable/dt/dataTables.bootstrap.css" rel="stylesheet" />
   
-  <script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
   <!-- <script src="<?php echo base_url(); ?>assets/ckeditor/samples/js/sample.js"></script>
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/ckeditor/samples/css/samples.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
  -->
-	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/libs/misc/datatables/datatables.min.css"> -->
-	<!-- endbuild -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
+  <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/libs/misc/datatables/datatables.min.css"> -->
+  <!-- endbuild -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
 
   <!-- sweetalert -->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/sweetalert-master/dist/sweetalert.css">
@@ -37,6 +37,7 @@
 
   <script src="<?php echo base_url();?>assets/sweetalert-master/dist/sweetalert.min.js"></script>
   <script src="<?php echo base_url();?>assets/js/jquery-2.2.2.js"></script>
+  <script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
 
 
   <!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/datatable/datatables.js"></script> -->
@@ -44,7 +45,7 @@
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/datatable/dt/dataTables.bootstrap.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/datatable/dt/jquery-1.11.1.min.js"></script>
  -->
-	<script src="<?php echo base_url(); ?>assets/libs/bower/breakpoints.js/dist/breakpoints.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/libs/bower/breakpoints.js/dist/breakpoints.min.js"></script>
 	<script>
 		Breakpoints();
 	</script>

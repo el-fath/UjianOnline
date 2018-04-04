@@ -36,7 +36,7 @@ $(document).ready(function(){
                         <label>Kelas :</label>
                         <select class="form-control" name="kelas">
                         <?php foreach($kel as $k){ ?>
-                        <option value="<?php echo $k->nm_kelas ?>"<?=$m->kelas == $k->nm_kelas ?'selected' : ''?>><?php echo $k->nm_kelas ?></option>
+                        <option value="<?php echo $k->id_kelas ?>"<?=$m->kelas == $k->id_kelas ?'selected' : ''?>><?php echo $k->nm_kelas ?></option>
                         <?php } ?>
                         </select>
 						<input type="hidden" name="id_matkul" class="form-control" value="<?php echo $m->id_matkul ?>">

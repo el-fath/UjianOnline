@@ -7,6 +7,7 @@ $(document).ready(function(){
   })
 });
 </script>
+
 <div class="wrap">
     <section class="app-content">
         <div class="row">
@@ -107,7 +108,7 @@ $(document).ready(function(){
                 text: "Tambah Soal Berhasil",
                 type: "success",
                 },function(){
-                window.location.href = "<?php echo base_url('bab'); ?>"
+                window.location.href = "<?php echo base_url('bab/all_soal/'.$id); ?>"
                 });
             },
             error:function(data){

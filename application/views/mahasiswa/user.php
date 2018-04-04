@@ -22,7 +22,7 @@
             <div class="col-md- col-sm-4">
             <div class="portfolio-item">
                 <div class="item-main">
-                    <a href="<?php echo base_url('mahasiswa/matkul/').$this->session->userdata("matkul"); ?>">
+                    <a href="<?php echo base_url('mahasiswa/matkul/').$this->session->userdata("nbi"); ?>">
                     <div class="portfolio-image">
                         <img src="<?php echo base_url(); ?>assets/assets-user/img/portfolio/thumb/test.png" alt="">
                         <div class="overlay">
@@ -38,7 +38,7 @@
             <div class="col-md- col-sm-4">
             <div class="portfolio-item">
                 <div class="item-main">
-                <a href="">
+                <a href="<?php echo base_url('mahasiswa/riwayat/').$this->session->userdata("nbi"); ?>">
                     <div class="portfolio-image">
                         <img src="<?php echo base_url(); ?>assets/assets-user/img/portfolio/thumb/lihat.png" alt="">
                         <div class="overlay">

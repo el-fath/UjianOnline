@@ -76,7 +76,7 @@ class Mahasiswa extends CI_Controller {
  	public function update($nbi)
  	{
 
- 		$config['upload_path'] = './gambar/';
+ 		$config['upload_path']   = './gambar/';
 		$config['allowed_types'] = 'gif|jpg|JPG|png|PNG';
 		$config['max_size']      = '1000';
 		$config['max_width']     = '1024';
@@ -138,6 +138,16 @@ class Mahasiswa extends CI_Controller {
  		$this->load->view('mahasiswa/template/footer');
  	}
 
+ 	public function riwayat($nbi)
+ 	{
+ 		$where = array('mahasiswa' => $nbi );
+		$data['riw'] = $this->models->tampil_riwayat('tb_riwayat',$where); 
+
+ 		$this->load->view('mahasiswa/template/header');
+ 		$this->load->view('mahasiswa/riwayat',$data);
+ 		$this->load->view('mahasiswa/template/footer');
+ 	}
+
  	public function krs($jurusan)
  	{
  		if(!$this->session->userdata('nbi')){
@@ -182,10 +192,41 @@ class Mahasiswa extends CI_Controller {
 		// redirect('matkul','refresh');
 	}
 
-	public function matkul($matkul)
+	public function ambil_matkul()
 	{
-		$where = array('matkul' => $matkul);
-		$data['soal'] = $this->models->edit($where,'tb_bab')->result();
+		$id_matkul = $this->input->post('id_matkul');
+		$nbi       = $this->session->userdata("nbi");
+
+		$where = array (
+			'id_matkul' => $id_matkul
+		);
+
+		$data['mtkl'] = $this->models->edit($where,'tb_matkul')->result();
+		// var_dump($data['mtkl']);
+		
+		if ($data['mtkl'] != NULL) {
+			// echo "sukses";
+			$arrayResponse = array('Code' => "Succees",'Message' => "Succees Bro", );
+			echo json_encode($arrayResponse);
+
+			$data = array(
+				"id_matkul" => $id_matkul,
+				"nbi"       => $nbi,
+				"status"    => 'belum dikonfirmasi'
+			);
+			
+			$this->models->tambah('tb_krs',$data);
+		}else{
+			// echo "gagal";
+			$arrayResponse = array('Code' => "Error",'Message' => "Kode kelas yang anda masukkan tidak terdaftar", );
+			echo json_encode($arrayResponse);
+		}
+	}
+
+	public function matkul($nbi)
+	{
+		$where = array('nbi' => $nbi,'status' => 'disetujui');
+		$data['bab_soal'] = $this->models->tampil_bab_soal('tb_krs',$where);
 
 		$this->load->view('mahasiswa/template/header');
  		$this->load->view('mahasiswa/masuk_ujian',$data);
@@ -206,22 +247,24 @@ class Mahasiswa extends CI_Controller {
 	{
 		echo "<pre>";
 		// var_dump($_REQUEST);
-		$soal   = $this->models->tampil('tb_soal')->result();
+		$soal = $this->models->tampil('tb_soal')->result();
 		$benar = 0;
 		$bool = true;
 		$no = 0;
 		$nilai = 0;
 		$id_bab = 0;
 		foreach ($soal as $key => $result) { 
-			$id_bab = $result->id_bab;
+			// $id_bab = $result->id_bab;
+			// echo($result->id_bab);
+			// echo($result->id_soal);
 			if ($this->input->post('pilihan'.$result->id_soal.'[]')) {
 
-				echo $no++;
-				echo "<br>";				
+				echo$no++;
+				echo "<br>";
 				$pilihan = ($this->input->post('pilihan'.$result->id_soal.'[]'));
 				print_r($pilihan);
 				
-				$jawaban = explode(' ', $result->jawaban);
+				$jawaban = explode('|', $result->jawaban);
 				print_r($jawaban);
 
 				if ($pilihan==$jawaban) {
@@ -233,12 +276,12 @@ class Mahasiswa extends CI_Controller {
 			}
 		}
 		$nilai = $benar*100/$no;
-		// echo 'Benar = '.$benar;
-		// echo "<br>";
-		// echo 'Nilai = '.$nilai;
+		echo 'Benar = '.$benar;
+		echo "<br>";
+		echo 'Nilai = '.$nilai;
 		// $mahasiswa = ;
 		// var_dump($mahasiswa);
-		// die();
+		die();
 
 		$data = array(
 			"mahasiswa" => $this->session->userdata("nbi"),

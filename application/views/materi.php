@@ -56,8 +56,8 @@
             <table id="table_ujian" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
               <tr>
-              <th>Id Soal</th>
-              <th>Nama Soal</th>
+              <th>Id Materi</th>
+              <th>Nama Materi</th>
               <th>Matkul</th>
               <th>Kelas</th>
               <th>Jenis</th>
@@ -74,10 +74,16 @@
               <td><?php echo $b->nm_kelas ?></td>
               <td><?php echo $b->nm_ujian ?></td>
               <td>
-                  <a href="<?php echo base_url('bab/edit/'.$b->id_bab) ?>"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></button></a>
+                <div class="btn-group" role="group">
+                  <!-- <a href="<?php echo base_url('bab/buat_soal/'.$b->id_bab) ?>" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a> -->
+                  <a href="<?php echo base_url('bab/all_soal/'.$b->id_bab) ?>" type="button" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                  <a href="<?php echo base_url('bab/edit/'.$b->id_bab) ?>" type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                  <a href="<?php echo base_url('bab/hapus/'.$b->id_bab) ?>" type="button" class="btn btn-danger btn-sm hapus"><i class="fa fa-trash"></i></a>
+                </div>
+                  <!-- <a href="<?php echo base_url('bab/edit/'.$b->id_bab) ?>"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></button></a>
                   <a href="<?php echo base_url('bab/hapus/'.$b->id_bab) ?>" class="hapus"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button></a>
                   <a href="<?php echo base_url('bab/buat_soal/'.$b->id_bab) ?>"><button type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button></a>
-                  <a href="<?php echo base_url('bab/all_soal/'.$b->id_bab) ?>"><button type="button" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></button></a>
+                  <a href="<?php echo base_url('bab/all_soal/'.$b->id_bab) ?>"><button type="button" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></button></a> -->
               </td>
               </tr>
             <?php } else :?>

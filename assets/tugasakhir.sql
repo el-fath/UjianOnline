@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2018 at 08:47 AM
+-- Generation Time: Apr 04, 2018 at 07:11 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -128,11 +128,11 @@ CREATE TABLE `tb_jenis_soal` (
 --
 
 INSERT INTO `tb_jenis_soal` (`id_j_soal`, `nm_j_soal`) VALUES
-(1, 'Pilihan 1 Jawaban'),
-(2, 'Pilihan 2 Jawaban'),
+(1, 'Pilihan Ganda'),
+(2, 'Mengurutkan'),
 (3, 'Benar Salah'),
 (4, 'Isian'),
-(5, 'Mengurutkan');
+(5, 'Menjodohkan');
 
 -- --------------------------------------------------------
 
@@ -214,18 +214,20 @@ INSERT INTO `tb_kelas` (`id_kelas`, `nm_kelas`) VALUES
 CREATE TABLE `tb_krs` (
   `id_krs` int(11) NOT NULL,
   `id_matkul` int(11) DEFAULT NULL,
-  `nbi` int(11) DEFAULT NULL
+  `nbi` int(11) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_krs`
 --
 
-INSERT INTO `tb_krs` (`id_krs`, `id_matkul`, `nbi`) VALUES
-(1, 4, 1),
-(8, 2, 3),
-(9, 5, 1),
-(10, 5, 3);
+INSERT INTO `tb_krs` (`id_krs`, `id_matkul`, `nbi`, `status`) VALUES
+(1, 4, 1, 'disetujui'),
+(8, 2, 3, 'belum dikonfirmasi'),
+(9, 5, 1, 'disetujui'),
+(10, 5, 3, 'ditolak'),
+(11, 6, 1, 'disetujui');
 
 -- --------------------------------------------------------
 
@@ -274,15 +276,15 @@ CREATE TABLE `tb_matkul` (
 --
 
 INSERT INTO `tb_matkul` (`id_matkul`, `nm_matkul`, `fakultas`, `jurusan`, `kelas`, `dosen`, `tgl`) VALUES
-(1, 'Algoritma', 1, 1, 'A', 3, '2018-02-07 13:25:55'),
-(2, 'Pancasila', 2, 5, 'B', 4, '2018-02-07 13:25:55'),
-(3, 'Pemrogaman Dasar', 1, 1, 'C', 1, '2018-02-07 13:25:55'),
-(4, 'Pemrogaman Lanjut', 1, 1, 'C', 1, '2018-02-07 13:25:55'),
-(5, 'Kalkulus', 1, 1, 'D', 3, '2018-02-07 13:25:55'),
-(6, 'Aljabar Linier', 1, 1, 'B', 1, '2018-02-07 13:25:55'),
-(7, 'Bahasa Inggris', 2, 4, 'B', 2, '2018-02-07 13:25:55'),
-(8, 'Bahasa Indonesia', 2, 5, 'D', 2, '2018-02-07 13:25:55'),
-(9, 'Jepang', 2, 6, 'E', 4, '2018-02-07 13:25:55');
+(1, 'Algoritma', 1, 1, '1', 3, '2018-02-07 13:25:55'),
+(2, 'Pancasila', 2, 5, '2', 4, '2018-02-07 13:25:55'),
+(3, 'Pemrogaman Dasar', 1, 1, '3', 1, '2018-02-07 13:25:55'),
+(4, 'Pemrogaman Lanjut', 1, 1, '3', 1, '2018-02-07 13:25:55'),
+(5, 'Kalkulus', 1, 1, '4', 3, '2018-02-07 13:25:55'),
+(6, 'Aljabar Linier', 1, 1, '2', 1, '2018-02-07 13:25:55'),
+(7, 'Bahasa Inggris', 2, 4, '2', 2, '2018-02-07 13:25:55'),
+(8, 'Bahasa Indonesia', 2, 5, '4', 2, '2018-02-07 13:25:55'),
+(9, 'Jepang', 2, 6, '5', 4, '2018-02-07 13:25:55');
 
 -- --------------------------------------------------------
 
@@ -330,11 +332,12 @@ CREATE TABLE `tb_soal` (
 --
 
 INSERT INTO `tb_soal` (`id_soal`, `soal`, `pil_a`, `pil_b`, `pil_c`, `pil_d`, `jawaban`, `id_bab`, `pembuat`, `id_j_soal`) VALUES
-(1, '<p>Salah satu manfaat yang sangat signifikan dari bangun pagi adalah tingkat srtess berkurang. Ketika bangun pai, anda tidak perlu terburu-buru melakukan pekerjaan. Anda dapat memulai hari dengan santai dan terencana. Anda pu bisa menikmati sarapan dengan tenang.</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Sumber:http://gaya.tempo.co/read/news/2016/08/24/060798655/empat-manfaat-bangun-pagi diakses 5 oktober 2016 pada pukul 16.45 WIB</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Gagasan utama teks tersebut adalah . . . .</p>\r\n', '<p>Salah satu manfaat dari bangun pagi.</p>\r\n', '<p>Tingkat stres berkurang saat kita bangu pagi.</p>\r\n', '<p>Saat bangu pagi, tidak perlu terburu-buru bekerja</p>\r\n', '<p>Mulailah hari dengan santai dan terencana</p>\r\n', 'A B', 1, 3, 2),
 (2, '<p>Beliau bernama lengkap Bob Sadino. Lahir di Lampung tanggal 9 Maret , wafat pada tanggal 19 januari 2015. Beliau akrab dipanggil dengan sebutan &lsquo;Om Bob&rsquo;. Ia adalah pengusaha asal indonesia yang berbisnis dibidang pangan dan peternakan. Ia adalah pemilik dari jaringan usaha kemfood dan Kemchik. Pada tahun 1967, Bob dan keluarga kembali ke Indonesia setelah beberapa tahun tinggal di Belanda. Jakarta Selatan sementara yang lain tetap ia simpan.<br />\r\nIa membawa serta 2 mercendes miliknya, buatan tahun 1960-an. Salah satunya ia jual untuk membeli sebidang tanah di Keman, Setelah beberapa lama tinggal dan hidup di Indonesia, Bob memutuskan untuk keluar dari pekerjaanya karena ia memiliki tekad untuk bekerja secara mandiri. Sebagai peternak ayam, Bob dan istrinya, setiap hari menjual beberapa kilogram telur. Dalam tempo satu setengah tahun, ia dan istrinya memiliki banyak langganan, terutama orang asing, karena mereka fasih berbahasa inggris. Bob dan istrinya tinggal di daerah Kemang Jakarta, tempat orang asing banyak menetap. Tidak jarang pasangan tersebut dihardik pelanggan, membantu orang asing sekalipun. Namun, mereka mengaca pada diri mereka sendiri, memperbaiki pelayanan. Perubahan drastis pu terjadi pada diri Bob, dari pribadi feodal menjadi pelayan. Setelah itu, lama-kelamaan Bob yang berambut perak, menjadi pemilik tunggal supermarket (pasar swalayan) Kemchik. Ia selalu tampil sederhana dengankemeja lengan pendek dan celanan pendek. (Sumber:www.biografiku.com/2009/12/biografi-bab-sadino diakses 2 Oktober 2016 pada pukul 16.50 WIB)</p>\r\n\r\n<p>Hal yang patut diteladani dri tokoh tersebut adalah . . .</p>\r\n', '<p>Menjadi pemilik jaringan usaha Kemfood dan Kemchik.</p>\r\n', '<p>Memutuskan keluar dari pekerjaanya dan bertekad menjadi mandiri.</p>\r\n', '<p>Memiliki banyak pelanggan orang asing di Jakarta.</p>\r\n', '<p>Tidak jarang dihardik pelanggan, pembantu orang asing sekalipun.</p>\r\n', 'B', 2, 3, 1),
-(3, '<p>Beliau bernama lengkap Bob Sadino. Lahir di Lampung tanggal 9 Maret , wafat pada tanggal 19 januari 2015. Beliau akrab dipanggil dengan sebutan &lsquo;Om Bob&rsquo;. Ia adalah pengusaha asal indonesia yang berbisnis dibidang pangan dan peternakan. Ia adalah pemilik dari jaringan usaha kemfood dan Kemchik. Pada tahun 1967, Bob dan keluarga kembali ke Indonesia setelah beberapa tahun tinggal di Belanda. Jakarta Selatan sementara yang lain tetap ia simpan.<br />\r\nIa membawa serta 2 mercendes miliknya, buatan tahun 1960-an. Salah satunya ia jual untuk membeli sebidang tanah di Keman, Setelah beberapa lama tinggal dan hidup di Indonesia, Bob memutuskan untuk keluar dari pekerjaanya karena ia memiliki tekad untuk bekerja secara mandiri. Sebagai peternak ayam, Bob dan istrinya, setiap hari menjual beberapa kilogram telur. Dalam tempo satu setengah tahun, ia dan istrinya memiliki banyak langganan, terutama orang asing, karena mereka fasih berbahasa inggris. Bob dan istrinya tinggal di daerah Kemang Jakarta, tempat orang asing banyak menetap. Tidak jarang pasangan tersebut dihardik pelanggan, membantu orang asing sekalipun. Namun, mereka mengaca pada diri mereka sendiri, memperbaiki pelayanan. Perubahan drastis pu terjadi pada diri Bob, dari pribadi feodal menjadi pelayan. Setelah itu, lama-kelamaan Bob yang berambut perak, menjadi pemilik tunggal supermarket (pasar swalayan) Kemchik. Ia selalu tampil sederhana dengankemeja lengan pendek dan celanan pendek. (Sumber:www.biografiku.com/2009/12/biografi-bab-sadino diakses 2 Oktober 2016 pada pukul 16.50 WIB)</p>\r\n\r\n<p>Keistimewaan tokoh tersebut adalah . . .</p>\r\n', '<p>Beliau akrab dipanggil &lsquo;Om Bob&rsquo;</p>\r\n', '<p>menjadi seorang pengusaha asal Indonesia di bidang pangan dan peternakan</p>\r\n', '<p>mau kembali ke Indonesia setelah lama tinggal di luar negeri.</p>\r\n', '<p>Mau berubah dari pribadi feodal menjadi seorang pelayan.</p>\r\n', 'D', 1, 4, 1),
-(4, '<p>Soal</p>\r\n', '<p>Pil A</p>\r\n', '<p>Pil B</p>\r\n', '<p>Pil C</p>\r\n', '<p>Pil D</p>\r\n', 'A C', 1, 4, NULL),
-(5, '<p>Soal 1</p>\r\n', '<p>Pil 1</p>\r\n', '<p>Pil 2</p>\r\n', '<p>Pil 3</p>\r\n', '<p>Pil 4</p>\r\n', 'A', 4, 4, NULL);
+(3, '<p>Beliau bernama lengkap Bob Sadino. Lahir di Lampung tanggal 9 Maret , wafat pada tanggal 19 januari 2015. Beliau akrab dipanggil dengan sebutan ‘Om Bob’. Ia adalah pengusaha asal indonesia yang berbisnis dibidang pangan dan peternakan. Ia adalah pemilik dari jaringan usaha kemfood dan Kemchik. Pada tahun 1967, Bob dan keluarga kembali ke Indonesia setelah beberapa tahun tinggal di Belanda. Jakarta Selatan sementara yang lain tetap ia simpan.<br />\r\nIa membawa serta 2 mercendes miliknya, buatan tahun 1960-an. Salah satunya ia jual untuk membeli sebidang tanah di Keman, Setelah beberapa lama tinggal dan hidup di Indonesia, Bob memutuskan untuk keluar dari pekerjaanya karena ia memiliki tekad untuk bekerja secara mandiri. Sebagai peternak ayam, Bob dan istrinya, setiap hari menjual beberapa kilogram telur. Dalam tempo satu setengah tahun, ia dan istrinya memiliki banyak langganan, terutama orang asing, karena mereka fasih berbahasa inggris. Bob dan istrinya tinggal di daerah Kemang Jakarta, tempat orang asing banyak menetap. Tidak jarang pasangan tersebut dihardik pelanggan, membantu orang asing sekalipun. Namun, mereka mengaca pada diri mereka sendiri, memperbaiki pelayanan. Perubahan drastis pu terjadi pada diri Bob, dari pribadi feodal menjadi pelayan. Setelah itu, lama-kelamaan Bob yang berambut perak, menjadi pemilik tunggal supermarket (pasar swalayan) Kemchik. Ia selalu tampil sederhana dengankemeja lengan pendek dan celanan pendek. (Sumber:www.biografiku.com/2009/12/biografi-bab-sadino diakses 2 Oktober 2016 pada pukul 16.50 WIB)</p>\r\n\r\n<p>Keistimewaan tokoh tersebut adalah . . .</p>\r\n', '<p>Beliau akrab dipanggil ‘Om Bobi’</p>\r\n', '<p>menjadi seorang pengusaha asal Indonesia di bidang pangan dan peternakan</p>\r\n', '<p>mau kembali ke Indonesia setelah lama tinggal di luar negeri.</p>\r\n', '<p>Mau berubah dari pribadi feodal menjadi seorang pelayan.</p>\r\n', 'A', 1, 4, 1),
+(5, '<p>Soal</p>\r\n', NULL, NULL, NULL, NULL, 'nyobak isian', 4, 4, 4),
+(6, '<p>soal isian</p>\r\n', NULL, NULL, NULL, NULL, 'jawaban', 1, 1, 4),
+(7, '<p>soal urutkan</p>\r\n', '<p>urut 1</p>\r\n', '<p>urut 2</p>\r\n', '<p>urut 3</p>\r\n', '<p>urut 4</p>\r\n', '2341', 1, 1, 2),
+(8, '<p>Nyobak benar salah men</p>\r\n', NULL, NULL, NULL, NULL, 'benar', 1, 1, 3);
 
 --
 -- Indexes for dumped tables
@@ -461,7 +464,7 @@ ALTER TABLE `tb_kelas`
 -- AUTO_INCREMENT for table `tb_krs`
 --
 ALTER TABLE `tb_krs`
-  MODIFY `id_krs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_krs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tb_matkul`
 --
@@ -476,7 +479,7 @@ ALTER TABLE `tb_riwayat`
 -- AUTO_INCREMENT for table `tb_soal`
 --
 ALTER TABLE `tb_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
