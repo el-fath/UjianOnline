@@ -33,8 +33,8 @@
                         <td><?php echo read_more($s->pil_c,50); ?>.....</td>
                         <td><?php echo read_more($s->pil_d,50); ?>.....</td>
                         <td>
-                        <a href="<?php echo base_url('bab/edit_soal/'.$s->id_bab.'/'.$s->id_soal) ?>"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></button></a>
-                        <a href="<?php echo base_url('bab/hapus_soal/'.$s->id_bab.'/'.$s->id_soal) ?>" class="hapus"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button></a>
+                        <a href="<?php echo base_url('bab/edit_soal/'.$s->id_test.'/'.$s->id_soal) ?>"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></button></a>
+                        <a href="<?php echo base_url('bab/hapus_soal/'.$s->id_test.'/'.$s->id_soal) ?>" class="hapus"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button></a>
                         </td>
                     </tr>
                     <?php }}else{ ?>

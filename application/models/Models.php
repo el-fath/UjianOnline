@@ -52,21 +52,21 @@ class Models extends CI_Model {
 
 	function tampil_join_bab()
 	{
-		$this->db->from('tb_bab');
-		$this->db->join('tb_matkul', 'tb_bab.matkul = tb_matkul.id_kelasmatkul', 'left');
-		$this->db->join('tb_kelas', 'tb_bab.kelas = tb_kelas.id_kelas', 'left');
-		$this->db->join('tb_jenis_ujian', 'tb_bab.jenis = tb_jenis_ujian.id_j_ujian', 'left');
+		$this->db->from('tb_test');
+		$this->db->join('tb_matkul', 'tb_test.matkul = tb_matkul.id_kelasmatkul', 'left');
+		$this->db->join('tb_kelas', 'tb_test.kelas = tb_kelas.id_kelas', 'left');
+		$this->db->join('tb_jenis_ujian', 'tb_test.jenis = tb_jenis_ujian.id_j_ujian', 'left');
 		$query = $this->db->get();
 	    return $query->result();
 	}
 
 	function tampil_join_bab_where($where)
 	{
-		$this->db->from('tb_bab');
-		$this->db->join('tb_matkul', 'tb_bab.matkul = tb_matkul.id_matkul', 'left');
-		$this->db->join('tb_kelas', 'tb_bab.kelas = tb_kelas.id_kelas', 'left');
-		$this->db->join('tb_jenis_ujian', 'tb_bab.jenis = tb_jenis_ujian.id_j_ujian', 'left');
-		$this->db->where('tb_bab.matkul', $where);
+		$this->db->from('tb_test');
+		$this->db->join('tb_matkul', 'tb_test.matkul = tb_matkul.id_matkul', 'left');
+		$this->db->join('tb_kelas', 'tb_matkul.kelas = tb_kelas.id_kelas', 'left');
+		$this->db->join('tb_jenis_ujian', 'tb_test.jenis = tb_jenis_ujian.id_j_ujian', 'left');
+		$this->db->where('tb_test.matkul', $where);
 		$query = $this->db->get();
 	    return $query->result();
 	}
@@ -74,7 +74,7 @@ class Models extends CI_Model {
 	function tampil_all_soal($where)
 	{
 		$this->db->from('tb_soal');
-		$this->db->join('tb_bab', 'tb_soal.id_bab = tb_bab.id_bab', 'left');
+		$this->db->join('tb_test', 'tb_soal.id_test = tb_test.id_test', 'left');
 		$this->db->where($where);
 		$query = $this->db->get();
 	    return $query->result();
@@ -84,6 +84,16 @@ class Models extends CI_Model {
 	{
 		$this->db->from($table);
 		$this->db->join('tb_fakultas', $table.'.fakultas = tb_fakultas.kd_fakultas', 'left');
+		$query = $this->db->get();
+	    return $query->result();
+	}
+
+	function tampil_mhs_fakjur($table,$where)
+	{
+		$this->db->from($table);
+		$this->db->join('tb_jurusan', $table.'.jurusan = tb_jurusan.kd_jurusan', 'left');
+		$this->db->join('tb_fakultas', 'tb_jurusan.fakultas = tb_fakultas.kd_fakultas', 'left');
+		$this->db->where($where);
 		$query = $this->db->get();
 	    return $query->result();
 	}
@@ -138,6 +148,24 @@ class Models extends CI_Model {
 	    return $query->result();
 	}
 
+	function tampil_nilai($table,$where)
+	{
+		$this->db->from($table);
+		$this->db->join('tb_mahasiswa', $table.'.nbi = tb_mahasiswa.nbi', 'left');
+		$this->db->where($where);
+		$query = $this->db->get();
+	    return $query->result();
+	}
+
+	function tampil_test($table,$where)
+	{
+		$this->db->from($table);
+		$this->db->join('tb_matkul', $table.'.matkul = tb_matkul.id_matkul', 'left');
+		$this->db->where($where);
+		$query = $this->db->get();
+	    return $query->result();
+	}
+
 	function tampil_anggota($table,$where)
 	{
 		$this->db->from($table);
@@ -150,10 +178,11 @@ class Models extends CI_Model {
 	function tampil_bab_soal($table,$where)
 	{
 		$this->db->from($table);
-		$this->db->join('tb_bab', $table.'.id_matkul = tb_bab.matkul', 'inner');
+		$this->db->join('tb_test', $table.'.id_matkul = tb_test.matkul', 'inner');
 		$this->db->join('tb_matkul', $table.'.id_matkul = tb_matkul.id_matkul', 'inner');
-		$this->db->join('tb_kelas', 'tb_matkul.kelas = tb_kelas.id_kelas', 'inner');
-		$this->db->join('tb_jenis_ujian', 'tb_bab.jenis = tb_jenis_ujian.id_j_ujian', 'inner');
+		$this->db->join('tb_kelas', 'tb_matkul.kelas = tb_kelas.id_kelas', 'left');
+		$this->db->join('tb_jenis_ujian', 'tb_test.jenis = tb_jenis_ujian.id_j_ujian', 'left');
+		// $this->db->join('tb_riwayat', 'tb_test.id_test = tb_riwayat.id_test', 'left');
 		$this->db->where($where);
 		$query = $this->db->get();
 	    return $query->result();
@@ -162,10 +191,16 @@ class Models extends CI_Model {
 	function tampil_riwayat($table,$where)
 	{
 		$this->db->from($table);
-		$this->db->join('tb_mahasiswa', $table.'.mahasiswa = tb_mahasiswa.nbi', 'left');
+		$this->db->join('tb_mahasiswa', $table.'.nbi = tb_mahasiswa.nbi', 'left');
 		$this->db->where($where);
 		$query = $this->db->get();
 	    return $query->result();
+	}
+
+	function soal_ujian($where,$table)
+	{
+		$this->db->order_by('rand()');
+		return $this->db->get_where($table,$where);
 	}
 }
 

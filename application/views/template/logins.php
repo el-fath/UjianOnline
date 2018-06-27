@@ -86,7 +86,7 @@
 </div>
   <div class="wrapper">
 
-    <nav class="navbar navbar-default navbar-fixed-top">
+<!--     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
 
         <div class="navbar-header">
@@ -100,7 +100,7 @@
             <i class="brand-icon fa fa-gg"></i>
             <span class="brand-name">U.O.T.S</span>
           </a>
-        </div><!-- .navbar-header -->
+        </div>
 
         <div class="navbar-collapse collapse" id="page-menu-collapse">
           <div class="navbar-right">
@@ -110,9 +110,9 @@
               <li><a data-scroll href="#reviews">Reviews</a></li>
             </ul>
           </div>
-        </div><!-- .navbar-collapse -->
+        </div>
 
-      </div><!-- .container -->
+      </div>
     </nav>
 
     <header id="header">
@@ -127,8 +127,8 @@
           </div>  
         </div>
 
-      </div><!-- .container -->
-    </header><!-- #header -->
+      </div>
+    </header> -->
 
     <section id="brief">
       <div id="brief-img">
@@ -157,7 +157,7 @@
       </div><!-- .container -->
     </section><!-- #brief -->
 
-    <section id="reviews">
+    <!-- <section id="reviews">
       <div class="container">
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
@@ -179,11 +179,11 @@
                 <p class="review-text">When you give everyone a voice and give people power, the system usually ends up in a really good place. So, what we view our role as, is giving people that power.</p>
                 <h4 class="reviewer">Mark Zuckerberg</h4>
               </div>
-            </div><!-- #owl-slider -->
-          </div><!-- /.col -->
+            </div>
+          </div>
         </div>
-      </div><!-- .container -->
-    </section>
+      </div>
+    </section> -->
 
     <section id="copyright">
       <div class="container text-center">
@@ -312,7 +312,7 @@
                   text: data.Message,
                   type: "success",
                   },function(){
-                  window.location.href = "<?php echo base_url('mahasiswa/user'); ?>"
+                    window.location.href = "<?php echo base_url('mahasiswa/matkul/') ?>"+data.Nbi;
                   });
                 }
               },
@@ -377,9 +377,6 @@
       });
       $selector.height(max);
     };
-
-
-
   </script>
 </body>
 

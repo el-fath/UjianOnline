@@ -4083,7 +4083,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     background-color: #080808;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-    color: #999;
+    color: #fff;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {

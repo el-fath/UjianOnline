@@ -28,7 +28,7 @@ $(document).ready(function(){
           <input type="text" class="form-control input-sm" required="" placeholder="" name="username">
           Fakultas
           <select class="form-control" name="fakultas" id="fakultas">
-            <option>Select Fakultas</option>}
+            <option>Select Fakultas</option>
             <?php foreach($fak as $f){ ?>
             <option value="<?php echo $f->kd_fakultas ?>"><?php echo $f->nm_fakultas ?></option>
             <?php } ?>
@@ -77,7 +77,7 @@ $(document).ready(function(){
             <tr>
             <td><?php echo $d->id_dosen ?></td>
             <td><?php echo $d->nm_dosen ?></td>
-            <td><img style="width: 125px;" src="<?php echo base_url(); ?>/gambar/dosen<?php echo '/'.$d->nm_dosen.'/'.$d->foto ?>"></td>
+            <td><img style="width: 125px;" src="<?php echo base_url(); ?>/gambar/dosen<?php echo '/'.$d->id_dosen.'/'.$d->foto ?>"></td>
             <td>
                 <a href="<?php echo base_url('dosen/edit/'.$d->id_dosen) ?>"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></button></a>
                 <a href="<?php echo base_url('dosen/hapus/'.$d->id_dosen) ?>" class="hapus"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button></a>

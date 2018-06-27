@@ -9,13 +9,13 @@
                 <tr>
                 <!-- <th>Id Matkul</th> -->
                 <th>No</th>
-                <th>Bab</th>
+                <th>Nama Test</th>
                 <th>NIlai</th>
                 </tr>
                 <?php $no=0; foreach($riw as $r){ $no++; ?>
                 <tr>
                 <td><?php echo $no ?></td>
-                <td><?php echo $r->bab ?></td>
+                <td><?php echo $r->id_test ?></td>
                 <td><?php echo $r->nilai ?></td>
                 </tr>
                 <?php } ?>

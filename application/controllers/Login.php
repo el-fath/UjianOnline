@@ -61,8 +61,9 @@ class Login extends CI_Controller {
 				'status'   => "login"
 			);
 			$this->session->set_userdata($data_session);
-
-			$arrayResponse = array('Code' => "Succees",'Message' => "Succees Bro", );
+			
+			$nbi = $this->session->userdata("nbi");
+			$arrayResponse = array('Code' => "Succees",'Message' => "Succees Bro",'Nbi' => $nbi );
 			echo json_encode($arrayResponse);
 		}else{
 			$arrayResponse = array('Code' => "Error",'Message' => "Login Gagal", );
@@ -110,45 +111,45 @@ class Login extends CI_Controller {
 		$this->load->view('template/daftardos');
 	}
 
-	public function tambah()
-	{
-		$id_dosen = $this->input->post('id_dosen');
-		$nm_dosen = $this->input->post('nm_dosen');
+	// public function tambah()
+	// {
+	// 	$id_dosen = $this->input->post('id_dosen');
+	// 	$nm_dosen = $this->input->post('nm_dosen');
 
-		mkdir('./gambar/dosen/'.$nm_dosen, 0777, TRUE);
-		$nmfile = "img_".$nm_dosen."_".time();
+	// 	mkdir('./gambar/dosen/'.$nm_dosen, 0777, TRUE);
+	// 	$nmfile = "img_".$nm_dosen."_".time();
 
-		$config['upload_path'] = './gambar/dosen/'.$nm_dosen;
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']  = '1000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
-		$config['file_name'] = $nmfile;
+	// 	$config['upload_path']   = './gambar/dosen/'.$nm_dosen;
+	// 	$config['allowed_types'] = 'gif|jpg|png';
+	// 	$config['max_size']      = '1000';
+	// 	$config['max_width']     = '1024';
+	// 	$config['max_height']    = '768';
+	// 	$config['file_name']     = $nmfile;
 		
-		$this->load->library('upload', $config);
+	// 	$this->load->library('upload', $config);
 		
-		if ( ! $this->upload->do_upload('foto')){
-			$error = array('error' => $this->upload->display_errors());
-	    	// echo "<script>alert('Upload foto gagal');</script>";
-			// var_dump($error);
-		}else{
-			$data = array('upload_data' => $this->upload->data());
-	    	// echo "<script>alert('Upload foto sukses');</script>";
-	    	// var_dump($this->upload->data());
-		}
+	// 	if ( ! $this->upload->do_upload('foto')){
+	// 		$error = array('error' => $this->upload->display_errors());
+	//     	// echo "<script>alert('Upload foto gagal');</script>";
+	// 		// var_dump($error);
+	// 	}else{
+	// 		$data = array('upload_data' => $this->upload->data());
+	//     	// echo "<script>alert('Upload foto sukses');</script>";
+	//     	// var_dump($this->upload->data());
+	// 	}
 
-		$foto = $this->upload->data();
+	// 	$foto = $this->upload->data();
 
-		$data1 = array(
-			"id_dosen" => $id_dosen,
-			"nm_dosen" => $nm_dosen,
-			"foto" => $foto['file_name']
-		);
+	// 	$data1 = array(
+	// 		"id_dosen" => $id_dosen,
+	// 		"nm_dosen" => $nm_dosen,
+	// 		"foto" => $foto['file_name']
+	// 	);
 
-		$this->models->tambah('tb_dosen',$data1);
+	// 	$this->models->tambah('tb_dosen',$data1);
 
-		redirect('dosen','refresh');
-	}
+	// 	redirect('dosen','refresh');
+	// }
 
 	public function regsis()
 	{

@@ -133,14 +133,23 @@ class Mahasiswa extends CI_Controller {
  		if(!$this->session->userdata('nbi')){
 			redirect('login');
 		}
+		$where = array('nbi' => $this->session->userdata('nbi'));
+		// $data['fak'] = $this->models->tampil('tb_fakultas')->result();
+		// $data['jur'] = $this->models->tampil('tb_jurusan')->result();
+		$data['mhs'] = $this->models->tampil_mhs_fakjur('tb_mahasiswa',$where);
  		$this->load->view('mahasiswa/template/header');
- 		$this->load->view('mahasiswa/user');
+ 		$this->load->view('mahasiswa/user',$data);
  		$this->load->view('mahasiswa/template/footer');
+ 	}
+
+ 	public function update_user($nbi)
+ 	{
+ 		echo $nbi;
  	}
 
  	public function riwayat($nbi)
  	{
- 		$where = array('mahasiswa' => $nbi );
+ 		$where = array('tb_riwayat.nbi' => $nbi );
 		$data['riw'] = $this->models->tampil_riwayat('tb_riwayat',$where); 
 
  		$this->load->view('mahasiswa/template/header');
@@ -225,68 +234,125 @@ class Mahasiswa extends CI_Controller {
 
 	public function matkul($nbi)
 	{
-		$where = array('nbi' => $nbi,'status' => 'disetujui');
+		$where = array('tb_krs.nbi' => $nbi,'status' => 'disetujui');
 		$data['bab_soal'] = $this->models->tampil_bab_soal('tb_krs',$where);
+		$w = array('nbi' => $nbi);
+		$data['riw'] = $this->models->edit($w,'tb_riwayat')->result();
 
 		$this->load->view('mahasiswa/template/header');
  		$this->load->view('mahasiswa/masuk_ujian',$data);
  		$this->load->view('mahasiswa/template/footer');
 	}
 
-	public function ujian($id_bab)
+	public function ujian($id_test)
 	{
-		$where = array('id_bab' => $id_bab);
-		$data['soal'] = $this->models->edit($where,'tb_soal')->result();
-		$data['bab']  = $this->models->edit($where,'tb_bab')->row();
-		$this->load->view('mahasiswa/template/header');
+		$where = array('id_test' => $id_test);
+		$data['id_test'] = $id_test;
+		$data['matkul'] = $this->models->tampil_test('tb_test',$where);
+		$data['soal'] = $this->models->soal_ujian($where,'tb_soal')->result();
+		// $data['bab']  = $this->models->edit($where,'tb_bab')->row();
+		// $this->load->view('mahasiswa/template/header');
  		$this->load->view('mahasiswa/ujian',$data);
- 		$this->load->view('mahasiswa/template/footer');
+ 		// $this->load->view('mahasiswa/template/footer');
 	}
 
-	public function penilaian()
+	public function penilaian($id_test)
 	{
-		echo "<pre>";
+		// echo "<pre>";
 		// var_dump($_REQUEST);
 		$soal = $this->models->tampil('tb_soal')->result();
-		$benar = 0;
-		$bool = true;
-		$no = 0;
-		$nilai = 0;
-		$id_bab = 0;
-		foreach ($soal as $key => $result) { 
-			// $id_bab = $result->id_bab;
-			// echo($result->id_bab);
-			// echo($result->id_soal);
-			if ($this->input->post('pilihan'.$result->id_soal.'[]')) {
+		$riw = $this->models->tampil('tb_riwayat')->num_rows();
 
-				echo$no++;
-				echo "<br>";
-				$pilihan = ($this->input->post('pilihan'.$result->id_soal.'[]'));
-				print_r($pilihan);
-				
-				$jawaban = explode('|', $result->jawaban);
-				print_r($jawaban);
+		if ($riw) {
+			$benar = 0;
+			$bool = true;
+			$no = 0;
+			$nilai = 0;
 
-				if ($pilihan==$jawaban) {
-					$benar = $benar + 1;
-					$bool = true;
-				}else{
-					$bool = false;
+			foreach ($soal as $key => $result) { 
+				if ($this->input->post('pilihan'.$result->id_soal.'[]')) {
+					$no++;
+
+					// echo $no;
+					// echo "<br>";
+					
+					$pilihan = ($this->input->post('pilihan'.$result->id_soal.'[]'));
+					$id_test=$result->id_test;
+					$pil=implode($pilihan);
+					
+					// echo'id -> '.$result->id_soal;
+					// echo"<br>";
+					// echo 'jwb_mhs = '.$pil;
+					// echo "<br>";
+					
+					if ($result->id_j_soal==4) {
+						$jawaban = $result->jawaban_isian;
+					}else{
+						$jawaban = $result->jawaban;
+					}
+					
+					// echo 'knc_jwb = '.($jawaban);
+
+					if ($result->id_j_soal==4) {
+						similar_text($pil, $jawaban, $persen);
+						
+						// echo"<br>";
+						// echo 'Kemiripan '.$persen.'%';
+						
+						// if ($pil==$jawaban) {
+						if ($persen>50) {
+							$benar = $benar + 1;
+							$bool = true;
+						}else{
+							$bool = false;
+						}
+
+						// $data = array(
+						// 	"riwayat" 		=> $riw+1,
+						// 	"id_soal"       => $result->id_soal,
+						// 	"jwb_isian_mhs" => $pil,
+						// );
+						// $this->models->tambah('tb_jwb_mhs',$data);
+					}else{
+						if ($pil==$jawaban) {
+						// if ($persen>75) {
+							$benar = $benar + 1;
+							$bool = true;
+						}else{
+							$bool = false;
+						}	
+
+						// $data = array(
+						// 	"riwayat" => $riw+1,
+						// 	"id_soal" => $result->id_soal,
+						// 	"jwb_mhs" => $pil,
+						// );
+						// $this->models->tambah('tb_jwb_mhs',$data);
+					}
+
+					// echo"<br><br>";		
 				}
 			}
+			$nilai = $benar*100/$no;
+
+			// echo 'Benar = '.$benar;
+			// echo "<br>";
+			// echo 'Nilai = '.$nilai;
+
+			$arrayResponse = array('Code' => "Succees",'Message' => "Nilai sudah disimpan", );
+			echo json_encode($arrayResponse);
+		}else{
+			$arrayResponse = array('Code' => "Error",'Message' => "penilaian Gagal", );
+			echo json_encode($arrayResponse);
 		}
-		$nilai = $benar*100/$no;
-		echo 'Benar = '.$benar;
-		echo "<br>";
-		echo 'Nilai = '.$nilai;
-		// $mahasiswa = ;
-		// var_dump($mahasiswa);
+		
 		die();
 
 		$data = array(
-			"mahasiswa" => $this->session->userdata("nbi"),
-			"bab"       => $id_bab,
-			"nilai"     => $nilai
+			"id_riwayat" => $riw+1,
+			"nbi"        => $this->session->userdata("nbi"),
+			"id_test"    => $id_test,
+			"nilai"      => $nilai
 		);
 
 		$this->models->tambah('tb_riwayat',$data);

@@ -36,6 +36,7 @@ class Matkul extends CI_Controller {
 		$data['mat'] = $this->models->tampil_matkul('tb_matkul');
 		
 		$where1 = $matkul;
+		$data['matkul'] = $matkul;
 		$data['bab'] = $this->models->tampil_join_bab_where($where1);
 		$this->load->view('template/header');
 		$this->load->view('materi',$data);
@@ -113,6 +114,7 @@ class Matkul extends CI_Controller {
 	public function lihat_anggota($matkul)
 	{
 		$where = array('id_matkul' => $matkul );
+		$data['matkul'] = $matkul;
 		$data['la'] = $this->models->tampil_anggota('tb_krs',$where);
 		// echo"<pre>";
 		// var_dump($data['la']);
@@ -121,22 +123,22 @@ class Matkul extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
-	public function terima($id_krs)
+	public function terima($matkul,$id_krs)
 	{
 		// echo $id_krs;
 		$where = array('id_krs' => $id_krs);
 		$data  = array('status' => 'disetujui');
 		$this->models->update($where,$data,'tb_krs');
-		// redirect('matkul/lihat_anggota','refresh');
+		redirect('matkul/lihat_anggota/'.$matkul,'refresh');
 	}
 
-	public function tolak($id_krs)
+	public function tolak($matkul,$id_krs)
 	{
 		// echo $id_krs;
 		$where = array('id_krs' => $id_krs);
 		$data  = array('status' => 'ditolak');
 		$this->models->update($where,$data,'tb_krs');
-		// redirect('matkul/lihat_anggota','refresh');
+		redirect('matkul/lihat_anggota/'.$matkul,'refresh');
 	}
 }
 

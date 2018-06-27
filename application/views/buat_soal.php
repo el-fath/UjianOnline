@@ -14,26 +14,26 @@ $(document).ready(function(){
             <div class="col-md-12">
                 <div class="widget widget-pie-chart">
                     <header class="widget-header">
-                        <h4 class="widget-title">Form Edit Bab</h4>
+                        <h4 class="widget-title">Tambah Soal</h4>
                     </header>
                     <hr class="widget-separator"/>
                     <div class="widget-body clearfix">
                         <?php foreach($bab as $b){ ?>
                         <form id="form-edit" action="<?php echo base_url('bab/tambah_soal')?>" method="POST">
-                        <label>Nama Bab :</label><input type="text" readonly name="nm_bab" class="form-control" value="<?php echo $b->nm_bab ?>">
-                        <input type="hidden" name="id_bab" class="form-control" value="<?php echo $b->id_bab ?>">
-                        <label>Matkul</label>
+                        <label>Nama test:</label><input type="text" readonly name="nm_test" class="form-control" value="<?php echo $b->nm_test ?>">
+                        <input type="hidden" name="id_test" class="form-control" value="<?php echo $b->id_test ?>">
+                        <label>Matkul - Kelas</label>
                         <select class="form-control" name="matkul" disabled>
-                        <?php foreach($mat as $m){ ?>
-                        <option value="<?php echo $m->id_matkul ?>"<?=$b->matkul == $m->id_matkul ?'selected' : ''?>><?php echo $m->nm_matkul ?></option>
+                        <?php foreach($matk as $m){ ?>
+                        <option value="<?php echo $m->id_matkul ?>"<?=$b->matkul == $m->id_matkul ?'selected' : ''?>><?php echo $m->nm_matkul ?> - <?php echo $m->nm_kelas ?></option>
                         <?php } ?>
                         </select>
-                        <label>Kelas</label>
+                        <!-- <label>Kelas</label>
                         <select class="form-control" name="kelas" disabled>
                         <?php foreach($kel as $k){ ?>
                         <option value="<?php echo $k->id_kelas ?>"<?=$b->kelas == $k->id_kelas ?'selected' : ''?>><?php echo $k->nm_kelas ?></option>
                         <?php } ?>
-                        </select>
+                        </select> -->
                         <label>Jenis</label>
                         <select class="form-control" name="jenis" disabled>
                         <?php foreach($jen as $j){ ?>
@@ -47,6 +47,7 @@ $(document).ready(function(){
                         <option value="<?php echo $js->id_j_soal ?>"><?php echo $js->nm_j_soal ?></option>
                         <?php } ?>
                         </select>
+                        <!-- <?php echo validation_errors(); ?> -->
                         <label>Soal :</label>
                         <textarea id="editor1" name="soal" required=""></textarea>
                         <br>
@@ -89,33 +90,38 @@ $(document).ready(function(){
 
     $(function() {
         $('#form-edit').on('submit',function(e) {
-        e.preventDefault();
-        var formData = new FormData( $("#form-edit")[0]);
-        console.log(new FormData(this));
-        for (instance in CKEDITOR.instances) {
-            CKEDITOR.instances[instance].updateElement();
-        }
-        $.ajax({
-          url: $("#form-edit").attr('action'), //nama action script php sobat
-            method:'POST',
-            data:new FormData(this),
-            contentType: false,
-            processData: false,
-            success:function(data){
-            console.log(data);
-          swal({
-                title: "Succes",
-                text: "Tambah Soal Berhasil",
-                type: "success",
-                },function(){
-                window.location.href = "<?php echo base_url('bab/all_soal/'.$id); ?>"
-                });
-            },
-            error:function(data){
-            swal("Oops...", "Something went wrong :(", "error");
-            },
-        });
-        e.preventDefault(); 
+            e.preventDefault();
+            var formData = new FormData( $("#form-edit")[0]);
+            console.log(new FormData(this));
+            for (instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
+            }
+            $.ajax({
+                url: $("#form-edit").attr('action'), //nama action script php sobat
+                method:'POST',
+                data:new FormData(this),
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success:function(data){
+                    console.log(data);
+                    if (data.Code == 'Error') {
+                        swal("Error!", data.Message, "error");
+                      // alert(data.Message);
+                    }else{
+                        swal({
+                            title: "Succes",
+                            text: data.Message,
+                            type: "success",
+                            },function(){
+                            window.location.href = "<?php echo base_url('bab/all_soal/'.$id); ?>"
+                        });
+                    }
+                },
+                error:function(data){
+                alert("Gagal Bro")
+                },
+            });
         });
     });
 </script>

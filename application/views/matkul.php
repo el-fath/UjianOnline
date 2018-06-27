@@ -61,7 +61,7 @@ $(document).ready(function(){
 					<br>
 					<br>
             <div class="table-responsive">
-            <table id="table_matkul" border="1" class="table table-bordered table-striped table-hover">
+            <table id="table_matkul" class="table table-bordered table-striped table-hover">
             <thead>
             <tr>
             <th>Id Matkul</th>

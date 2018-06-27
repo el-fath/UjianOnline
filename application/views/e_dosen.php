@@ -40,7 +40,7 @@ $(document).ready(function(){
 						<label>Foto Dosen :</label>
 						<br>
                         <input type="file" name="foto" class="form-control" value="<?php echo $d->foto ?>" id="image-source" onchange="previewImage();">
-						<img style="width: 200px;" id="image-preview" src="<?php echo base_url(); ?>/gambar/dosen<?php echo '/'.$d->nm_dosen.'/'.$d->foto ?>">
+						<img style="width: 200px;" id="image-preview" src="<?php echo base_url(); ?>/gambar/dosen<?php echo '/'.$d->id_dosen.'/'.$d->foto ?>">
 						<input type="hidden" name="id_dosen" class="form-control" value="<?php echo $d->id_dosen ?>">
 						<br>
 						<button type="submit" class="btn btn-primary btn-sm">Edit</button>

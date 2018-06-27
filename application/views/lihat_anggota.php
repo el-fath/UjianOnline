@@ -34,8 +34,8 @@
               <!-- <td><?php echo $l->fakultas ?> - <?php echo $l->jurusan ?></td> -->
               <td><?php echo $l->status ?></td>
               <td>
-                <a href="<?php echo base_url('matkul/terima/'.$l->id_krs)?>" class="terima"><button type="button" class="btn btn-success btn-sm" <?=$l->status != 'disetujui' ? '':'disabled' ?>><i class="fa fa-check"></i></button></a>
-                <a href="<?php echo base_url('matkul/tolak/'.$l->id_krs)?>" class="tolak"><button type="button" class="btn btn-danger btn-sm" <?=$l->status != 'ditolak' ? '':'disabled' ?>><i class="fa fa-times"></i></button></a>
+                <a href="<?php echo base_url('matkul/terima/'.$matkul.'/'.$l->id_krs)?>" class="terima"><button type="button" class="btn btn-success btn-sm" <?=$l->status != 'disetujui' ? '':'disabled' ?>><i class="fa fa-check"></i></button></a>
+                <a href="<?php echo base_url('matkul/tolak/'.$matkul.'/'.$l->id_krs)?>" class="tolak"><button type="button" class="btn btn-danger btn-sm" <?=$l->status != 'ditolak' ? '':'disabled' ?>><i class="fa fa-times"></i></button></a>
               </td>
               </tr>
             <?php } else :?>

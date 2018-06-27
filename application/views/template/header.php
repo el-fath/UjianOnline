@@ -69,10 +69,10 @@
       <span class="zmdi zmdi-hc-lg zmdi-more"></span>
     </button>
 
-    <button type="button" class="navbar-toggle navbar-toggle-right collapsed" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
+<!--     <button type="button" class="navbar-toggle navbar-toggle-right collapsed" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
       <span class="sr-only">Toggle navigation</span>
       <span class="zmdi zmdi-hc-lg zmdi-search"></span>
-    </button>
+    </button> -->
 
     <a href="../index.html" class="navbar-brand">
       <!-- <span class="brand-icon"><i class="fa fa-coffee"></i></span> -->
@@ -126,7 +126,7 @@
         <div class="avatar avatar-md avatar-circle">
           <a href="javascript:void(0)">
           <!-- <img class="img-responsive" src="<?php echo base_url(); ?>assets/assets/images/221.jpg" alt="avatar"/> -->
-          <img style="width: 125px;" class="img-responsive" alt="avatar" src="<?php echo base_url(); ?>/gambar/dosen/<?php echo $this->session->userdata("nama")?>/<?php echo $this->session->userdata("foto")?>">
+          <img style="width: 125px;" class="img-responsive" alt="avatar" src="<?php echo base_url(); ?>/gambar/dosen/<?php echo $this->session->userdata("id_dosen")?>/<?php echo $this->session->userdata("foto")?>">
           </a>
         </div><!-- .avatar -->
       </div>

@@ -9,21 +9,21 @@
 					<hr class="widget-separator"/>
 					<div class="widget-body clearfix">
 						<?php foreach($bab as $b){ ?>
-						<form id="form-edit" action="<?php echo base_url('bab/update/'.$b->id_bab)?>" method="POST">
-						<label>Nama Nama Soal :</label><input type="text" name="nm_bab" class="form-control" value="<?php echo $b->nm_bab ?>">
-						<input type="hidden" name="id_bab" class="form-control" value="<?php echo $b->id_bab ?>">
+						<form id="form-edit" action="<?php echo base_url('bab/update/'.$b->id_test)?>" method="POST">
+						<label>Nama Nama Soal :</label><input type="text" name="nm_test" class="form-control" value="<?php echo $b->nm_test ?>">
+						<input type="hidden" name="id_test" class="form-control" value="<?php echo $b->id_test ?>">
 						<label>Matkul</label>
 						<select class="form-control" name="matkul">
-				        <?php foreach($mat as $m){ ?>
-				        <option value="<?php echo $m->id_matkul ?>"<?=$b->matkul == $m->id_matkul ?'selected' : ''?>><?php echo $m->nm_matkul ?></option>
+				        <?php foreach($matk as $m){ ?>
+	        			<option value="<?php echo $m->id_matkul ?>"<?=$b->matkul == $m->id_matkul ?'selected' : ''?>><?php echo $m->nm_matkul ?> - <?php echo $m->nm_kelas ?></option>
 				        <?php } ?>
 				      	</select>
-				      	<label>Kelas</label>
+				      	<!-- <label>Kelas</label>
 						<select class="form-control" name="kelas">
 				        <?php foreach($kel as $k){ ?>
 				        <option value="<?php echo $k->id_kelas ?>"<?=$b->kelas == $k->id_kelas ?'selected' : ''?>><?php echo $k->nm_kelas ?></option>
 				        <?php } ?>
-				      	</select>
+				      	</select> -->
 				      	<label>Jenis</label>
 						<select class="form-control" name="jenis">
 				        <?php foreach($jen as $j){ ?>
@@ -58,7 +58,7 @@
         text: "Edit Data Berhasil",
         type: "success",
         },function(){
-        window.location.href = "<?php echo base_url('bab'); ?>"
+        window.location.href = "<?php echo base_url('matkul/materi/'.$matkul); ?>"
         });
             },
             error:function(data){

@@ -85,15 +85,18 @@ class Dosen extends CI_Controller {
  	{
 		$id_dosen = $id_dosen;
 		$nm_dosen = $this->input->post('nm_dosen');
+		// $foto     = $this->upload->data();
 		
- 		$nmfile = "img_".$nm_dosen."_".time();
+ 		if ($foto != NULL) {
+	 		$nmfile = "img_".$id_dosen."_".time();
+			$config['file_name']     = $nmfile;
+ 		}
 		
-		$config['upload_path']   = './gambar/dosen/'.$nm_dosen;
+		$config['upload_path']   = './gambar/dosen/'.$id_dosen;
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']      = '5000';
 		$config['max_width']     = '5000';
 		$config['max_height']    = '5000';
-		$config['file_name']     = $nmfile;
 
 		$this->load->library('upload', $config);
 			
@@ -101,11 +104,11 @@ class Dosen extends CI_Controller {
 			$error = array('error' => $this->upload->display_errors());
 	    	echo "<script>alert('Upload foto gagal');</script>";
 			var_dump($error);
-			var_dump($gambar);
+			// var_dump($gambar);
 		}else{
 			$data = array('upload_data' => $this->upload->data());
 	    	echo "<script>alert('Upload foto sukses');</script>";
-			var_dump($gambar);
+			// var_dump($gambar);
 	    	// var_dump($this->upload->data());
 		}
 
